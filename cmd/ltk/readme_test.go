@@ -573,6 +573,26 @@ func TestReadmeSaysExactlyWhatItHolds(t *testing.T) {
 	}
 }
 
+// TestReadmeLinksTheAcceptanceRun: "How this was made" links the acceptance run's document, which exists, and the
+// table of what is in the repository names docs/.
+func TestReadmeLinksTheAcceptanceRun(t *testing.T) {
+	text := readReadme(t)
+	how := readmeSection(t, readmeFirstPage(t, text), "### How this was made")
+	if !strings.Contains(how, "[`docs/acceptance-run.md`](docs/acceptance-run.md)") {
+		t.Error(`"How this was made" does not link docs/acceptance-run.md`)
+	}
+	if _, err := os.Stat(filepath.Join(readmeModuleRoot, "docs", "acceptance-run.md")); err != nil {
+		t.Errorf("the linked document: %v", err)
+	}
+	found := false
+	for _, row := range readmeTableRows(readmeSection(t, text, "## What is in this repository"), "| Path | What it holds |") {
+		found = found || (len(row) == 2 && row[0] == "`docs/`" && row[1] != "")
+	}
+	if !found {
+		t.Error("the table of what is in the repository does not name docs/")
+	}
+}
+
 // readmeTableRows returns the cells of the rows of the Markdown table whose header is header.
 func readmeTableRows(text, header string) [][]string {
 	var rows [][]string

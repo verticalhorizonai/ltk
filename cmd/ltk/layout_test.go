@@ -2,8 +2,8 @@ package main
 
 // The Repository layout guard.
 //
-// Nothing sits at the repository's root except the seven folders (cmd, internal, schemas, corpus, repro, testdata,
-// .github), the README, the licence and the Go module files, go.mod and go.sum beside it. The guard reads the top-level
+// Nothing sits at the repository's root except the eight folders (cmd, internal, schemas, corpus, repro, testdata,
+// docs, .github), the README, the licence and the Go module files, go.mod and go.sum beside it. The guard reads the top-level
 // entries of the files git tracks (`git ls-files`, run from the module root, so .git itself is never an entry) and
 // fails on anything else. It ignores exactly the build package's own files, which govern the build and are not part of
 // the exported repository, and nothing else. Outside a git work tree (a container that mounts the module without its
@@ -11,7 +11,7 @@ package main
 //
 // The folders' contents are held on the file system, which needs no git: corpus/ holds the catalogue, its schema copy
 // and each entry's XDR file and decoded JSON; schemas/ holds the schema and its embedding file only; repro/ holds the
-// two reports and nothing else; internal/repro/ holds the two reproductions' code, testdata/ small corpora and
+// two reports and nothing else; docs/ holds the acceptance run's document and nothing else; internal/repro/ holds the two reproductions' code, testdata/ small corpora and
 // .github/ the CI workflow.
 
 import (
@@ -37,20 +37,23 @@ var packageOwnEntries = []string{
 	"reconciliation-report.md", "source-fidelity.md", "swarm-init-prompt.md", // the package's generation reports
 }
 
-// repositoryRootEntries are the top-level entries the repository allows: the seven folders, the README, the licence
+// repositoryRootEntries are the top-level entries the repository allows: the eight folders, the README, the licence
 // and the Go module files (go.sum beside go.mod).
 var repositoryRootEntries = []string{
-	"cmd", "internal", "schemas", "corpus", "repro", "testdata", ".github",
+	"cmd", "internal", "schemas", "corpus", "repro", "testdata", "docs", ".github",
 	"README.md", "LICENSE", "go.mod", "go.sum",
 }
 
 // requiredRootEntries are the entries the repository cannot lack (go.sum is allowed, not required).
 var requiredRootEntries = []string{
-	"cmd", "internal", "schemas", "corpus", "repro", "testdata", ".github", "README.md", "LICENSE", "go.mod",
+	"cmd", "internal", "schemas", "corpus", "repro", "testdata", "docs", ".github", "README.md", "LICENSE", "go.mod",
 }
 
 // committedReports are the only files of repro/.
 var committedReports = []string{"repro/js-sdk-1766.json", "repro/wallet-backend-729.json"}
+
+// committedDocs are the only files of docs/: the acceptance run's document.
+var committedDocs = []string{"docs/acceptance-run.md"}
 
 // gitFiles lists the files git knows under the module root, with forward slashes, relative to it: the tracked files,
 // and with untracked also the untracked files git does not ignore. Outside a git work tree, or with no git, it skips
@@ -119,8 +122,8 @@ func layoutFindings(files []string) []string {
 }
 
 // TestRepositoryLayout: the tracked files' top-level entries are the ones the repository allows, the build package's
-// own entries aside; every required entry is there; and repro/ holds exactly the two reports, tracked or not yet
-// tracked.
+// own entries aside; every required entry is there; repro/ holds exactly the two reports and docs/ exactly the
+// acceptance run's document, tracked or not yet tracked.
 func TestRepositoryLayout(t *testing.T) {
 	tracked := gitFiles(t, false)
 	if extra := layoutFindings(tracked); len(extra) != 0 {
@@ -131,15 +134,22 @@ func TestRepositoryLayout(t *testing.T) {
 			t.Errorf("the repository's root lacks %s: %v", e, err)
 		}
 	}
-	var repro []string
+	var repro, docs []string
 	for _, p := range gitFiles(t, true) {
-		if topEntry(p) == "repro" {
+		switch topEntry(p) {
+		case "repro":
 			repro = append(repro, p)
+		case "docs":
+			docs = append(docs, p)
 		}
 	}
 	sort.Strings(repro)
+	sort.Strings(docs)
 	if !slices.Equal(repro, committedReports) {
 		t.Errorf("repro/ holds %q; want exactly %q and nothing else", repro, committedReports)
+	}
+	if !slices.Equal(docs, committedDocs) {
+		t.Errorf("docs/ holds %q; want exactly %q and nothing else", docs, committedDocs)
 	}
 }
 
@@ -148,13 +158,13 @@ func TestRepositoryLayout(t *testing.T) {
 func TestLayoutFindings(t *testing.T) {
 	files := []string{
 		"README.md", "LICENSE", "go.mod", "go.sum", "cmd/ltk/main.go", "internal/x/y.go", "schemas/embed.go",
-		"corpus/catalogue.json", "repro/js-sdk-1766.json", "testdata/a", ".github/workflows/ci.yml",
+		"corpus/catalogue.json", "repro/js-sdk-1766.json", "testdata/a", ".github/workflows/ci.yml", "docs/acceptance-run.md",
 		"CLAUDE.md", "specs/a.md", "tasks/001.json", "tests/a.md", "agents/a.md", "tools/a.mjs", ".githooks/pre-commit",
 		".gitattributes", "manifest.json", "id-registry.json", "verification-reports/a.txt",
 		"reconciliation-report.md", "source-fidelity.md", "swarm-init-prompt.md",
-		"Makefile", "docs/a.md", "docs/b.md", "CLAUDE.md.bak", "ltk",
+		"Makefile", "doc/a.md", "doc/b.md", "CLAUDE.md.bak", "ltk",
 	}
-	if got, want := layoutFindings(files), []string{"CLAUDE.md.bak", "Makefile", "docs", "ltk"}; !slices.Equal(got, want) {
+	if got, want := layoutFindings(files), []string{"CLAUDE.md.bak", "Makefile", "doc", "ltk"}; !slices.Equal(got, want) {
 		t.Errorf("findings %q, want %q", got, want)
 	}
 	if len(packageOwnEntries) != 14 {
@@ -193,6 +203,14 @@ func TestRepositoryFoldersHoldWhatTheSpecSays(t *testing.T) {
 	}
 	if got := filesUnder(t, filepath.Join(root, "repro")); !slices.Equal(got, reports) {
 		t.Errorf("repro/ holds %q, want %q and nothing else", got, reports)
+	}
+	// docs/: the acceptance run's document and nothing else.
+	var docs []string
+	for _, d := range committedDocs {
+		docs = append(docs, strings.TrimPrefix(d, "docs/"))
+	}
+	if got := filesUnder(t, filepath.Join(root, "docs")); !slices.Equal(got, docs) {
+		t.Errorf("docs/ holds %q, want %q and nothing else", got, docs)
 	}
 	// The code of the two reproductions under internal/repro/, with the SDK reproduction's script; the CI workflow
 	// under .github/; small corpora under testdata/, some broken on purpose.

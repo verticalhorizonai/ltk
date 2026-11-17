@@ -167,7 +167,9 @@ README. The specification was drafted with the same tools under the spec owner's
 what was to be built and the questions the specification left open, and reviewed the results before they were
 accepted; other agent sessions, separate from the ones that wrote the code, checked it against the specification.
 The committed corpus and the two reports in `repro/` were written by the tool's own commands and were not edited by
-hand.
+hand. After the first commit, a separate agent session, given only this README, ran every `ltk` command here in a
+fresh clone; what it did, what it found and what changed because of it are in
+[`docs/acceptance-run.md`](docs/acceptance-run.md).
 
 ### Licence
 
@@ -1860,5 +1862,6 @@ go test -tags integration -p 1 -timeout 120m ./cmd/ltk/ ./internal/orchestrator/
 | `corpus/` | The three entries, the catalogue and its copy of the schema, as `ltk generate --all --out corpus` wrote them: committed data, not source |
 | `repro/` | The two reproductions' last reports, and nothing else |
 | `testdata/` | Small corpora for the tests, some of them broken on purpose, and the comparison fixtures |
+| `docs/` | The acceptance run's document: what a separate agent session did with this README, what it found and what changed |
 | `.github/` | The continuous integration workflow |
 | `README.md`, `LICENSE`, `go.mod`, `go.sum` | This file, the licence, and the Go module files |
