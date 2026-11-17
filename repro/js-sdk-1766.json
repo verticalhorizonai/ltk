@@ -1,0 +1,40 @@
+{
+  "target": "js-sdk-1766",
+  "versions": [
+    {
+      "version": "17.2.0",
+      "role": "before_fix",
+      "steps": [
+        {
+          "step": "build",
+          "passed": false,
+          "error": "Assets are not in lexicographic order"
+        }
+      ],
+      "roundTripIdentical": false
+    },
+    {
+      "version": "17.2.1",
+      "role": "fix",
+      "steps": [
+        {
+          "step": "build",
+          "passed": true,
+          "error": null
+        },
+        {
+          "step": "decode",
+          "passed": true,
+          "error": null
+        },
+        {
+          "step": "re_encode",
+          "passed": true,
+          "error": null
+        }
+      ],
+      "roundTripIdentical": true
+    }
+  ],
+  "passed": true
+}

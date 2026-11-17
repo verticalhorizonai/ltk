@@ -1,0 +1,59 @@
+{
+  "target": "wallet-backend-729",
+  "protocolVersion": 28,
+  "commits": [
+    {
+      "commit": "2a0a84ea",
+      "role": "before_fix",
+      "ledger": 21,
+      "ingested": false,
+      "error": "Error ingesting data for ledger 21 (attempt 1/5): persisting ledger data for ledger 21: running atomic function in RunInTransaction: inserting processed data into db for ledger 21: batch inserting state changes: pgx CopyFrom state_changes: ERROR: COPY from stdin failed: converting signer_account_id: converting address to bytes: stellar address PDAOG5GD5ETFKS5GE34T3LRNNGNGK3T5LOOCOL6JRS4MUBIMOZ252AAAAAOWCZLM7IOUJEVHGW4A2BBZO6FO5BUPYKBE57STREZE5CZEYUAAAAHSLA has a 68-byte key payload; the account_id column stores only 32-byte account/contract keys (SQLSTATE 57014)",
+      "storedRow": null,
+      "retries": 5,
+      "restarts": 1,
+      "logPath": "/tmp/ltk-e3c9e4be/wallet-backend-729/2a0a84ea/wallet-backend.log",
+      "storeStatePath": "/tmp/ltk-e3c9e4be/wallet-backend-729/2a0a84ea/store-state.txt"
+    },
+    {
+      "commit": "2c873353",
+      "role": "fix",
+      "ledger": 21,
+      "ingested": true,
+      "error": null,
+      "storedRow": {
+        "to_id": 90194317312,
+        "operation_id": 90194317313,
+        "state_change_id": 268435457,
+        "state_change_category": "SIGNER",
+        "state_change_reason": "ADD",
+        "ingested_at": "2026-11-16T23:57:25.745955+00:00",
+        "ledger_number": 21,
+        "account_id": "\\x30741cf3f8f2aaeaadb4cc94381f3aab3596cad64b5279bc05cdd5af3742ab245e",
+        "token_id": null,
+        "amount": null,
+        "signer_account_id": "\\x78c0e374c3e926554ba626f93dae2d699a656e7d5b9c272fc98cb8ca050c7675dd0000001d61656cfa1d4492a735b80d0439778aee868fc2824efe5389324e8b24c5000000",
+        "spender_account_id": null,
+        "creator_account_id": null,
+        "destination_account_id": null,
+        "liquidity_pool_id": null,
+        "signer_weight_old": null,
+        "signer_weight_new": 1,
+        "threshold": null,
+        "threshold_old": null,
+        "threshold_new": null,
+        "trustline_limit_old": null,
+        "trustline_limit_new": null,
+        "flags": null,
+        "data_entry_name": null,
+        "key_value": null,
+        "to_muxed_id": null,
+        "ledger_created_at": "2026-11-16T23:57:24+00:00"
+      },
+      "retries": 0,
+      "restarts": 0,
+      "logPath": "/tmp/ltk-e3c9e4be/wallet-backend-729/2c873353/wallet-backend.log",
+      "storeStatePath": "/tmp/ltk-e3c9e4be/wallet-backend-729/2c873353/store-state.txt"
+    }
+  ],
+  "passed": true
+}

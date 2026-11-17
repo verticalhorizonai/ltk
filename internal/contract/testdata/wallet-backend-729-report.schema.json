@@ -1,0 +1,129 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "WalletBackend729Report",
+  "description": "Output of ltk repro wallet-backend-729, saved as repro/wallet-backend-729.json.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["target", "protocolVersion", "commits", "passed"],
+  "properties": {
+    "target": { "type": "string", "const": "wallet-backend-729" },
+    "protocolVersion": { "type": "integer", "const": 28 },
+    "commits": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 2,
+      "prefixItems": [
+        {
+          "allOf": [
+            { "$ref": "#/$defs/WalletBackendCommitResult" },
+            {
+              "properties": {
+                "commit": { "const": "2a0a84ea" },
+                "role": { "const": "before_fix" }
+              }
+            }
+          ]
+        },
+        {
+          "allOf": [
+            { "$ref": "#/$defs/WalletBackendCommitResult" },
+            {
+              "properties": {
+                "commit": { "const": "2c873353" },
+                "role": { "const": "fix" }
+              }
+            }
+          ]
+        }
+      ],
+      "items": false
+    },
+    "passed": { "type": "boolean" }
+  },
+  "if": {
+    "required": ["passed"],
+    "properties": { "passed": { "const": true } }
+  },
+  "then": {
+    "properties": {
+      "commits": {
+        "prefixItems": [
+          { "properties": { "ingested": { "const": false }, "retries": { "const": 5 }, "restarts": { "const": 1 } } },
+          { "properties": { "ingested": { "const": true } } }
+        ]
+      }
+    }
+  },
+  "$defs": {
+    "WalletBackendCommit": {
+      "type": "string",
+      "enum": ["2a0a84ea", "2c873353"]
+    },
+    "FixRole": {
+      "type": "string",
+      "enum": ["before_fix", "fix"]
+    },
+    "WalletBackendCommitResult": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "commit",
+        "role",
+        "ledger",
+        "ingested",
+        "error",
+        "storedRow",
+        "retries",
+        "restarts",
+        "logPath",
+        "storeStatePath"
+      ],
+      "properties": {
+        "commit": { "$ref": "#/$defs/WalletBackendCommit" },
+        "role": { "$ref": "#/$defs/FixRole" },
+        "ledger": { "type": "integer", "minimum": 1 },
+        "ingested": { "type": "boolean" },
+        "error": { "type": ["string", "null"] },
+        "storedRow": { "type": ["object", "null"] },
+        "retries": { "type": "integer", "minimum": 0 },
+        "restarts": { "type": "integer", "minimum": 0 },
+        "logPath": { "type": "string", "minLength": 1 },
+        "storeStatePath": { "type": "string", "minLength": 1 }
+      },
+      "allOf": [
+        {
+          "if": {
+            "required": ["commit"],
+            "properties": { "commit": { "const": "2a0a84ea" } }
+          },
+          "then": { "properties": { "role": { "const": "before_fix" } } }
+        },
+        {
+          "if": {
+            "required": ["commit"],
+            "properties": { "commit": { "const": "2c873353" } }
+          },
+          "then": { "properties": { "role": { "const": "fix" } } }
+        },
+        {
+          "if": {
+            "required": ["ingested"],
+            "properties": { "ingested": { "const": true } }
+          },
+          "then": {
+            "properties": {
+              "error": { "type": "null" },
+              "storedRow": { "type": "object" }
+            }
+          },
+          "else": {
+            "properties": {
+              "error": { "type": "string", "minLength": 1 },
+              "storedRow": { "type": "null" }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

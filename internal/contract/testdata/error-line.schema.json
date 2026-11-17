@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ErrorLine",
+  "description": "One line of ltk standard error (JSON Lines).",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["code", "message"],
+  "properties": {
+    "code": {
+      "type": "string",
+      "enum": ["failure", "usage_error", "environment_missing"]
+    },
+    "message": { "type": "string", "minLength": 1 }
+  }
+}

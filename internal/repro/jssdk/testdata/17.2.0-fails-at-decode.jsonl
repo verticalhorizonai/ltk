@@ -1,0 +1,1 @@
+{"sdkVersion":"17.2.0","steps":[{"step":"build","passed":true,"error":null},{"step":"decode","passed":false,"error":"Assets are not in lexicographic order"}],"roundTripIdentical":false,"builtXdr":"AAAAAAAAAAYAAAADAAAAAAAAAAFVU0QAAAAAAI2kiXvlS8gIOPkG8sMd5AEPwV7Ug99wt4DQBeurJ1QnAAAAAVVTRAAAAAAAvv+39MLl7eIwnkYLBNlPC9IiwgoSAcJ8jIV3eHlzo1IAAAAef/////////8=","reEncodedXdr":null}

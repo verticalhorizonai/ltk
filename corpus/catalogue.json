@@ -1,0 +1,750 @@
+{
+  "entries": [
+    {
+      "id": "cap-0040-signed-payload-signer",
+      "cap": "CAP-0040",
+      "protocolVersion": 30,
+      "protocolFallback": false,
+      "source": "captured by ltk generate from a local stellar-core network (stellar/quickstart@sha256:a61ce821add98adb4f3e3d6e757b2615dd169a2b39c7e30cd47cfa95074f97d9, local mode, core and RPC): the LedgerCloseMeta that RPC getLedgers returned as metadataXdr for the ledger holding the shape's transaction",
+      "synthetic": false,
+      "expectedDecodedValues": {
+        "reproducedByEveryRun": [
+          {
+            "pointer": "/v2/tx_set/v1/phases/0/v0/0/txset_comp_txs_maybe_discounted_fee/txs/0/tx/tx/source_account",
+            "value": "GB2BZ47Y6KVOVLNUZSKDQHZ2VM2ZNSWWJNJHTPAFZXK26N2CVMSF4HNJ"
+          },
+          {
+            "pointer": "/v2/tx_set/v1/phases/0/v0/0/txset_comp_txs_maybe_discounted_fee/txs/0/tx/tx/operations/0/body/set_options/signer/key",
+            "value": "PDAOG5GD5ETFKS5GE34T3LRNNGNGK3T5LOOCOL6JRS4MUBIMOZ252AAAAAOWCZLM7IOUJEVHGW4A2BBZO6FO5BUPYKBE57STREZE5CZEYUAAAAHSLA"
+          },
+          {
+            "pointer": "/v2/tx_set/v1/phases/0/v0/0/txset_comp_txs_maybe_discounted_fee/txs/0/tx/tx/operations/0/body/set_options/signer/weight",
+            "value": 1
+          },
+          {
+            "pointer": "/v2/tx_processing/0/result/result/result/tx_success/0/op_inner/set_options",
+            "value": "success"
+          },
+          {
+            "pointer": "/v2/tx_processing/0/tx_apply_processing/v4/operations/0/changes/1/updated/data/account/signers/0/key",
+            "value": "PDAOG5GD5ETFKS5GE34T3LRNNGNGK3T5LOOCOL6JRS4MUBIMOZ252AAAAAOWCZLM7IOUJEVHGW4A2BBZO6FO5BUPYKBE57STREZE5CZEYUAAAAHSLA"
+          }
+        ],
+        "ledgerDependent": [
+          {
+            "field": "ledger_hash",
+            "pointer": "/v2/ledger_header/hash",
+            "value": "09778152d6dc1cd4024a4cd09fba30a5c25015ce8d8f3860275eed5b5e9ec1be"
+          },
+          {
+            "field": "previous_ledger_hash",
+            "pointer": "/v2/ledger_header/header/previous_ledger_hash",
+            "value": "36a5378cf6ea1e69fdac1850b4d888f189e0992e58b8950ffe8ed7ff24a86cbd"
+          },
+          {
+            "field": "transaction_set_hash",
+            "pointer": "/v2/ledger_header/header/scp_value/tx_set_hash",
+            "value": "20f9466ebd6da669283403be147eea2226be0ef8a916df466a061c711bd39e88"
+          },
+          {
+            "field": "close_time",
+            "pointer": "/v2/ledger_header/header/scp_value/close_time",
+            "value": "1794873034"
+          },
+          {
+            "field": "close_time",
+            "pointer": "/v2/ledger_header/header/scp_value/ext/signed_ms/close_time_ms",
+            "value": "1794873034024"
+          },
+          {
+            "field": "consensus_signature",
+            "pointer": "/v2/ledger_header/header/scp_value/ext/signed_ms/lc_value_signature/signature",
+            "value": "9f56c42125ed067b7b486d52eeab84231d644c165dab9be4db5e5c0e177d4ae94e395d52c7f625599ea097bfb83d9b69ba3c077484827dfc493e582b6edad30a"
+          },
+          {
+            "field": "transaction_result_set_hash",
+            "pointer": "/v2/ledger_header/header/tx_set_result_hash",
+            "value": "ac1d259120200167b0c00d0b96b51a7762b9e1650673674a70c1d82781eec4f6"
+          },
+          {
+            "field": "bucket_list_hash",
+            "pointer": "/v2/ledger_header/header/bucket_list_hash",
+            "value": "006060d6fc4cf0a72dfc026aa88b0638ce1a2dcbc5186a4665c62f79a328a83a"
+          },
+          {
+            "field": "ledger_number",
+            "pointer": "/v2/ledger_header/header/ledger_seq",
+            "value": 16
+          },
+          {
+            "field": "fee_pool",
+            "pointer": "/v2/ledger_header/header/fee_pool",
+            "value": "10505887"
+          },
+          {
+            "field": "bucket_list_hash",
+            "pointer": "/v2/ledger_header/header/skip_list/0",
+            "value": "0000000000000000000000000000000000000000000000000000000000000000"
+          },
+          {
+            "field": "bucket_list_hash",
+            "pointer": "/v2/ledger_header/header/skip_list/1",
+            "value": "0000000000000000000000000000000000000000000000000000000000000000"
+          },
+          {
+            "field": "bucket_list_hash",
+            "pointer": "/v2/ledger_header/header/skip_list/2",
+            "value": "0000000000000000000000000000000000000000000000000000000000000000"
+          },
+          {
+            "field": "bucket_list_hash",
+            "pointer": "/v2/ledger_header/header/skip_list/3",
+            "value": "0000000000000000000000000000000000000000000000000000000000000000"
+          },
+          {
+            "field": "previous_ledger_hash",
+            "pointer": "/v2/tx_set/v1/previous_ledger_hash",
+            "value": "36a5378cf6ea1e69fdac1850b4d888f189e0992e58b8950ffe8ed7ff24a86cbd"
+          },
+          {
+            "field": "source_sequence_number",
+            "pointer": "/v2/tx_set/v1/phases/0/v0/0/txset_comp_txs_maybe_discounted_fee/txs/0/tx/tx/seq_num",
+            "value": "64424509441"
+          },
+          {
+            "field": "transaction_signature",
+            "pointer": "/v2/tx_set/v1/phases/0/v0/0/txset_comp_txs_maybe_discounted_fee/txs/0/tx/signatures/0/signature",
+            "value": "d543c65a150718733f688f81c398d494b24b93482ca49c7db6804ff9acdf035328f99b876289c77a24ecbbd143e2eafcb3a911982a46fc6ec94723af0a068301"
+          },
+          {
+            "field": "transaction_hash",
+            "pointer": "/v2/tx_processing/0/result/transaction_hash",
+            "value": "d27e94248fc646cfaf903f898608c495172eec896e308516c4d6adfa40258ce9"
+          },
+          {
+            "field": "last_modified_ledger",
+            "pointer": "/v2/tx_processing/0/fee_processing/0/state/last_modified_ledger_seq",
+            "value": 15
+          },
+          {
+            "field": "source_sequence_number",
+            "pointer": "/v2/tx_processing/0/fee_processing/0/state/data/account/seq_num",
+            "value": "64424509440"
+          },
+          {
+            "field": "last_modified_ledger",
+            "pointer": "/v2/tx_processing/0/fee_processing/1/updated/last_modified_ledger_seq",
+            "value": 16
+          },
+          {
+            "field": "source_sequence_number",
+            "pointer": "/v2/tx_processing/0/fee_processing/1/updated/data/account/seq_num",
+            "value": "64424509440"
+          },
+          {
+            "field": "last_modified_ledger",
+            "pointer": "/v2/tx_processing/0/tx_apply_processing/v4/tx_changes_before/0/state/last_modified_ledger_seq",
+            "value": 16
+          },
+          {
+            "field": "source_sequence_number",
+            "pointer": "/v2/tx_processing/0/tx_apply_processing/v4/tx_changes_before/0/state/data/account/seq_num",
+            "value": "64424509440"
+          },
+          {
+            "field": "last_modified_ledger",
+            "pointer": "/v2/tx_processing/0/tx_apply_processing/v4/tx_changes_before/1/updated/last_modified_ledger_seq",
+            "value": 16
+          },
+          {
+            "field": "source_sequence_number",
+            "pointer": "/v2/tx_processing/0/tx_apply_processing/v4/tx_changes_before/1/updated/data/account/seq_num",
+            "value": "64424509441"
+          },
+          {
+            "field": "ledger_number",
+            "pointer": "/v2/tx_processing/0/tx_apply_processing/v4/tx_changes_before/1/updated/data/account/ext/v1/ext/v2/ext/v3/seq_ledger",
+            "value": 16
+          },
+          {
+            "field": "close_time",
+            "pointer": "/v2/tx_processing/0/tx_apply_processing/v4/tx_changes_before/1/updated/data/account/ext/v1/ext/v2/ext/v3/seq_time",
+            "value": "1794873034"
+          },
+          {
+            "field": "last_modified_ledger",
+            "pointer": "/v2/tx_processing/0/tx_apply_processing/v4/operations/0/changes/0/state/last_modified_ledger_seq",
+            "value": 16
+          },
+          {
+            "field": "source_sequence_number",
+            "pointer": "/v2/tx_processing/0/tx_apply_processing/v4/operations/0/changes/0/state/data/account/seq_num",
+            "value": "64424509441"
+          },
+          {
+            "field": "ledger_number",
+            "pointer": "/v2/tx_processing/0/tx_apply_processing/v4/operations/0/changes/0/state/data/account/ext/v1/ext/v2/ext/v3/seq_ledger",
+            "value": 16
+          },
+          {
+            "field": "close_time",
+            "pointer": "/v2/tx_processing/0/tx_apply_processing/v4/operations/0/changes/0/state/data/account/ext/v1/ext/v2/ext/v3/seq_time",
+            "value": "1794873034"
+          },
+          {
+            "field": "last_modified_ledger",
+            "pointer": "/v2/tx_processing/0/tx_apply_processing/v4/operations/0/changes/1/updated/last_modified_ledger_seq",
+            "value": 16
+          },
+          {
+            "field": "source_sequence_number",
+            "pointer": "/v2/tx_processing/0/tx_apply_processing/v4/operations/0/changes/1/updated/data/account/seq_num",
+            "value": "64424509441"
+          },
+          {
+            "field": "ledger_number",
+            "pointer": "/v2/tx_processing/0/tx_apply_processing/v4/operations/0/changes/1/updated/data/account/ext/v1/ext/v2/ext/v3/seq_ledger",
+            "value": 16
+          },
+          {
+            "field": "close_time",
+            "pointer": "/v2/tx_processing/0/tx_apply_processing/v4/operations/0/changes/1/updated/data/account/ext/v1/ext/v2/ext/v3/seq_time",
+            "value": "1794873034"
+          }
+        ]
+      },
+      "filePath": "cap-0040-signed-payload-signer/entry.xdr",
+      "xdrType": "LedgerCloseMeta",
+      "sha256": "de6ba37691b5a2b97f56805285c6b3a05b8c53995ea14118e3887125f9095ae0",
+      "length": 1928
+    },
+    {
+      "id": "cap-0038-pool-share-trustline",
+      "cap": "CAP-0038",
+      "protocolVersion": 30,
+      "protocolFallback": false,
+      "source": "captured by ltk generate from a local stellar-core network (stellar/quickstart@sha256:a61ce821add98adb4f3e3d6e757b2615dd169a2b39c7e30cd47cfa95074f97d9, local mode, core and RPC): the LedgerCloseMeta that RPC getLedgers returned as metadataXdr for the ledger holding the shape's transaction",
+      "synthetic": false,
+      "expectedDecodedValues": {
+        "reproducedByEveryRun": [
+          {
+            "pointer": "/v2/tx_set/v1/phases/0/v0/0/txset_comp_txs_maybe_discounted_fee/txs/0/tx/tx/source_account",
+            "value": "GB5W4EM3JCA56WVTR4ZTLMXEF3RUNAQSWLTP3E3MSXTMZEURRF6GKTKB"
+          },
+          {
+            "pointer": "/v2/tx_set/v1/phases/0/v0/0/txset_comp_txs_maybe_discounted_fee/txs/0/tx/tx/operations/0/body/change_trust/line/pool_share/liquidity_pool_constant_product/asset_a/credit_alphanum4/asset_code",
+            "value": "USD"
+          },
+          {
+            "pointer": "/v2/tx_set/v1/phases/0/v0/0/txset_comp_txs_maybe_discounted_fee/txs/0/tx/tx/operations/0/body/change_trust/line/pool_share/liquidity_pool_constant_product/asset_a/credit_alphanum4/issuer",
+            "value": "GCG2JCL34VF4QCBY7EDPFQY54QAQ7QK62SB564FXQDIAL25LE5KCPEX4"
+          },
+          {
+            "pointer": "/v2/tx_set/v1/phases/0/v0/0/txset_comp_txs_maybe_discounted_fee/txs/0/tx/tx/operations/0/body/change_trust/line/pool_share/liquidity_pool_constant_product/asset_b/credit_alphanum4/asset_code",
+            "value": "USD"
+          },
+          {
+            "pointer": "/v2/tx_set/v1/phases/0/v0/0/txset_comp_txs_maybe_discounted_fee/txs/0/tx/tx/operations/0/body/change_trust/line/pool_share/liquidity_pool_constant_product/asset_b/credit_alphanum4/issuer",
+            "value": "GC7P7N7UYLS63YRQTZDAWBGZJ4F5EIWCBIJADQT4RSCXO6DZOORVFUZC"
+          },
+          {
+            "pointer": "/v2/tx_set/v1/phases/0/v0/0/txset_comp_txs_maybe_discounted_fee/txs/0/tx/tx/operations/0/body/change_trust/line/pool_share/liquidity_pool_constant_product/fee",
+            "value": 30
+          },
+          {
+            "pointer": "/v2/tx_processing/0/result/result/result/tx_success/0/op_inner/change_trust",
+            "value": "success"
+          }
+        ],
+        "ledgerDependent": [
+          {
+            "field": "ledger_hash",
+            "pointer": "/v2/ledger_header/hash",
+            "value": "a31cb42b4a1a7ca528996016f4641df09e68f7c0fa73c6e9afe778002043cd42"
+          },
+          {
+            "field": "previous_ledger_hash",
+            "pointer": "/v2/ledger_header/header/previous_ledger_hash",
+            "value": "bb2ace7827b2126e4855788fb3c9afe2336f0b4eae2e6c4e321af9f15680d571"
+          },
+          {
+            "field": "transaction_set_hash",
+            "pointer": "/v2/ledger_header/header/scp_value/tx_set_hash",
+            "value": "34cd85d60145018597b048ebbd29827ea1d325b747e298f2eb2d31cea6f74ec5"
+          },
+          {
+            "field": "close_time",
+            "pointer": "/v2/ledger_header/header/scp_value/close_time",
+            "value": "1794873041"
+          },
+          {
+            "field": "close_time",
+            "pointer": "/v2/ledger_header/header/scp_value/ext/signed_ms/close_time_ms",
+            "value": "1794873041033"
+          },
+          {
+            "field": "consensus_signature",
+            "pointer": "/v2/ledger_header/header/scp_value/ext/signed_ms/lc_value_signature/signature",
+            "value": "71fb94d8a09db19644a0add210fdf4ab02e219a727209133a4f67e354004f79650464da38b89a567252613263e793a3d3a943ac35389701c59af7da6b319e90e"
+          },
+          {
+            "field": "transaction_result_set_hash",
+            "pointer": "/v2/ledger_header/header/tx_set_result_hash",
+            "value": "1e3a54df335f6b0bdfef33c55073eac602b144686a5901054b0635a1ef9f2ff8"
+          },
+          {
+            "field": "bucket_list_hash",
+            "pointer": "/v2/ledger_header/header/bucket_list_hash",
+            "value": "10a704d3a1fe29c96ae4b555449cd80ccd5c025da3a06fae9edea0f350594857"
+          },
+          {
+            "field": "ledger_number",
+            "pointer": "/v2/ledger_header/header/ledger_seq",
+            "value": 23
+          },
+          {
+            "field": "fee_pool",
+            "pointer": "/v2/ledger_header/header/fee_pool",
+            "value": "10506487"
+          },
+          {
+            "field": "bucket_list_hash",
+            "pointer": "/v2/ledger_header/header/skip_list/0",
+            "value": "0000000000000000000000000000000000000000000000000000000000000000"
+          },
+          {
+            "field": "bucket_list_hash",
+            "pointer": "/v2/ledger_header/header/skip_list/1",
+            "value": "0000000000000000000000000000000000000000000000000000000000000000"
+          },
+          {
+            "field": "bucket_list_hash",
+            "pointer": "/v2/ledger_header/header/skip_list/2",
+            "value": "0000000000000000000000000000000000000000000000000000000000000000"
+          },
+          {
+            "field": "bucket_list_hash",
+            "pointer": "/v2/ledger_header/header/skip_list/3",
+            "value": "0000000000000000000000000000000000000000000000000000000000000000"
+          },
+          {
+            "field": "previous_ledger_hash",
+            "pointer": "/v2/tx_set/v1/previous_ledger_hash",
+            "value": "bb2ace7827b2126e4855788fb3c9afe2336f0b4eae2e6c4e321af9f15680d571"
+          },
+          {
+            "field": "source_sequence_number",
+            "pointer": "/v2/tx_set/v1/phases/0/v0/0/txset_comp_txs_maybe_discounted_fee/txs/0/tx/tx/seq_num",
+            "value": "90194313218"
+          },
+          {
+            "field": "transaction_signature",
+            "pointer": "/v2/tx_set/v1/phases/0/v0/0/txset_comp_txs_maybe_discounted_fee/txs/0/tx/signatures/0/signature",
+            "value": "a0ccd240ae9b5ca19d8f7524373faafef150e12edbd24d4f6dce5f2d8ed6efd7071278ec30d84f1cb040207971d9bf49839537773e4577e6fa276e8d78728708"
+          },
+          {
+            "field": "transaction_hash",
+            "pointer": "/v2/tx_processing/0/result/transaction_hash",
+            "value": "2b2d15b54c4f23345c2296532869a88556867c62d37e5eb6b214f48375807efc"
+          },
+          {
+            "field": "last_modified_ledger",
+            "pointer": "/v2/tx_processing/0/fee_processing/0/state/last_modified_ledger_seq",
+            "value": 22
+          },
+          {
+            "field": "source_sequence_number",
+            "pointer": "/v2/tx_processing/0/fee_processing/0/state/data/account/seq_num",
+            "value": "90194313217"
+          },
+          {
+            "field": "ledger_number",
+            "pointer": "/v2/tx_processing/0/fee_processing/0/state/data/account/ext/v1/ext/v2/ext/v3/seq_ledger",
+            "value": 22
+          },
+          {
+            "field": "close_time",
+            "pointer": "/v2/tx_processing/0/fee_processing/0/state/data/account/ext/v1/ext/v2/ext/v3/seq_time",
+            "value": "1794873040"
+          },
+          {
+            "field": "last_modified_ledger",
+            "pointer": "/v2/tx_processing/0/fee_processing/1/updated/last_modified_ledger_seq",
+            "value": 23
+          },
+          {
+            "field": "source_sequence_number",
+            "pointer": "/v2/tx_processing/0/fee_processing/1/updated/data/account/seq_num",
+            "value": "90194313217"
+          },
+          {
+            "field": "ledger_number",
+            "pointer": "/v2/tx_processing/0/fee_processing/1/updated/data/account/ext/v1/ext/v2/ext/v3/seq_ledger",
+            "value": 22
+          },
+          {
+            "field": "close_time",
+            "pointer": "/v2/tx_processing/0/fee_processing/1/updated/data/account/ext/v1/ext/v2/ext/v3/seq_time",
+            "value": "1794873040"
+          },
+          {
+            "field": "last_modified_ledger",
+            "pointer": "/v2/tx_processing/0/tx_apply_processing/v4/tx_changes_before/0/state/last_modified_ledger_seq",
+            "value": 23
+          },
+          {
+            "field": "source_sequence_number",
+            "pointer": "/v2/tx_processing/0/tx_apply_processing/v4/tx_changes_before/0/state/data/account/seq_num",
+            "value": "90194313217"
+          },
+          {
+            "field": "ledger_number",
+            "pointer": "/v2/tx_processing/0/tx_apply_processing/v4/tx_changes_before/0/state/data/account/ext/v1/ext/v2/ext/v3/seq_ledger",
+            "value": 22
+          },
+          {
+            "field": "close_time",
+            "pointer": "/v2/tx_processing/0/tx_apply_processing/v4/tx_changes_before/0/state/data/account/ext/v1/ext/v2/ext/v3/seq_time",
+            "value": "1794873040"
+          },
+          {
+            "field": "last_modified_ledger",
+            "pointer": "/v2/tx_processing/0/tx_apply_processing/v4/tx_changes_before/1/updated/last_modified_ledger_seq",
+            "value": 23
+          },
+          {
+            "field": "source_sequence_number",
+            "pointer": "/v2/tx_processing/0/tx_apply_processing/v4/tx_changes_before/1/updated/data/account/seq_num",
+            "value": "90194313218"
+          },
+          {
+            "field": "ledger_number",
+            "pointer": "/v2/tx_processing/0/tx_apply_processing/v4/tx_changes_before/1/updated/data/account/ext/v1/ext/v2/ext/v3/seq_ledger",
+            "value": 23
+          },
+          {
+            "field": "close_time",
+            "pointer": "/v2/tx_processing/0/tx_apply_processing/v4/tx_changes_before/1/updated/data/account/ext/v1/ext/v2/ext/v3/seq_time",
+            "value": "1794873041"
+          },
+          {
+            "field": "last_modified_ledger",
+            "pointer": "/v2/tx_processing/0/tx_apply_processing/v4/operations/0/changes/0/created/last_modified_ledger_seq",
+            "value": 23
+          },
+          {
+            "field": "last_modified_ledger",
+            "pointer": "/v2/tx_processing/0/tx_apply_processing/v4/operations/0/changes/1/state/last_modified_ledger_seq",
+            "value": 22
+          },
+          {
+            "field": "last_modified_ledger",
+            "pointer": "/v2/tx_processing/0/tx_apply_processing/v4/operations/0/changes/2/updated/last_modified_ledger_seq",
+            "value": 23
+          },
+          {
+            "field": "last_modified_ledger",
+            "pointer": "/v2/tx_processing/0/tx_apply_processing/v4/operations/0/changes/3/state/last_modified_ledger_seq",
+            "value": 23
+          },
+          {
+            "field": "source_sequence_number",
+            "pointer": "/v2/tx_processing/0/tx_apply_processing/v4/operations/0/changes/3/state/data/account/seq_num",
+            "value": "90194313218"
+          },
+          {
+            "field": "ledger_number",
+            "pointer": "/v2/tx_processing/0/tx_apply_processing/v4/operations/0/changes/3/state/data/account/ext/v1/ext/v2/ext/v3/seq_ledger",
+            "value": 23
+          },
+          {
+            "field": "close_time",
+            "pointer": "/v2/tx_processing/0/tx_apply_processing/v4/operations/0/changes/3/state/data/account/ext/v1/ext/v2/ext/v3/seq_time",
+            "value": "1794873041"
+          },
+          {
+            "field": "last_modified_ledger",
+            "pointer": "/v2/tx_processing/0/tx_apply_processing/v4/operations/0/changes/4/updated/last_modified_ledger_seq",
+            "value": 23
+          },
+          {
+            "field": "source_sequence_number",
+            "pointer": "/v2/tx_processing/0/tx_apply_processing/v4/operations/0/changes/4/updated/data/account/seq_num",
+            "value": "90194313218"
+          },
+          {
+            "field": "ledger_number",
+            "pointer": "/v2/tx_processing/0/tx_apply_processing/v4/operations/0/changes/4/updated/data/account/ext/v1/ext/v2/ext/v3/seq_ledger",
+            "value": 23
+          },
+          {
+            "field": "close_time",
+            "pointer": "/v2/tx_processing/0/tx_apply_processing/v4/operations/0/changes/4/updated/data/account/ext/v1/ext/v2/ext/v3/seq_time",
+            "value": "1794873041"
+          },
+          {
+            "field": "last_modified_ledger",
+            "pointer": "/v2/tx_processing/0/tx_apply_processing/v4/operations/0/changes/5/state/last_modified_ledger_seq",
+            "value": 22
+          },
+          {
+            "field": "last_modified_ledger",
+            "pointer": "/v2/tx_processing/0/tx_apply_processing/v4/operations/0/changes/6/updated/last_modified_ledger_seq",
+            "value": 23
+          },
+          {
+            "field": "last_modified_ledger",
+            "pointer": "/v2/tx_processing/0/tx_apply_processing/v4/operations/0/changes/7/created/last_modified_ledger_seq",
+            "value": 23
+          }
+        ]
+      },
+      "filePath": "cap-0038-pool-share-trustline/entry.xdr",
+      "xdrType": "LedgerCloseMeta",
+      "sha256": "ba7dde01fa8e288aaf0ea75fbd3f416fbb85d67395f07480af228c6ebb10771b",
+      "length": 2824,
+      "networkRefusalEvidence": {
+        "submittedEnvelopeXdr": "AAAAAgAAAAB7bhGbSIHfWrOPMzWy5C7jRoISsub9k2yV5sySkYl8ZQAAAGQAAAAVAAAAAwAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAABgAAAAMAAAAAAAAAAVVTRAAAAAAAvv+39MLl7eIwnkYLBNlPC9IiwgoSAcJ8jIV3eHlzo1IAAAABVVNEAAAAAACNpIl75UvICDj5BvLDHeQBD8Fe1IPfcLeA0AXrqydUJwAAAB5//////////wAAAAAAAAABkYl8ZQAAAEA6EgDdsw0wEIqeYvFpORWfgVBOJC4rXuTLFwbpbvxyl2CMMNdVuYuxDGr7gfPpfw1NYFAUbezzidi2ucaYYY0A",
+        "resultCode": "CHANGE_TRUST_MALFORMED"
+      }
+    },
+    {
+      "id": "cap-0027-muxed-account",
+      "cap": "CAP-0027",
+      "protocolVersion": 30,
+      "protocolFallback": false,
+      "source": "captured by ltk generate from a local stellar-core network (stellar/quickstart@sha256:a61ce821add98adb4f3e3d6e757b2615dd169a2b39c7e30cd47cfa95074f97d9, local mode, core and RPC): the LedgerCloseMeta that RPC getLedgers returned as metadataXdr for the ledger holding the shape's transaction",
+      "synthetic": false,
+      "expectedDecodedValues": {
+        "reproducedByEveryRun": [
+          {
+            "pointer": "/v2/tx_set/v1/phases/0/v0/0/txset_comp_txs_maybe_discounted_fee/txs/0/tx/tx/source_account",
+            "value": "MCKOWD5UOOQSUQVZET77IP257VIHREOKEYYDT2YTICIX7QOVPJYZXAAAAAAAAAACZRJWK"
+          },
+          {
+            "pointer": "/v2/tx_set/v1/phases/0/v0/0/txset_comp_txs_maybe_discounted_fee/txs/0/tx/tx/operations/0/body/payment/destination",
+            "value": "MD2K4NVPX57MX3R2XXODFNMRMOUUTSL5MEBDAANMVF5RNF6X4FOBWAAAAAAAAAACZS6CO"
+          },
+          {
+            "pointer": "/v2/tx_set/v1/phases/0/v0/0/txset_comp_txs_maybe_discounted_fee/txs/0/tx/tx/operations/0/body/payment/asset",
+            "value": "native"
+          },
+          {
+            "pointer": "/v2/tx_set/v1/phases/0/v0/0/txset_comp_txs_maybe_discounted_fee/txs/0/tx/tx/operations/0/body/payment/amount",
+            "value": "100000000"
+          },
+          {
+            "pointer": "/v2/tx_processing/0/result/result/result/tx_success/0/op_inner/payment",
+            "value": "success"
+          }
+        ],
+        "ledgerDependent": [
+          {
+            "field": "ledger_hash",
+            "pointer": "/v2/ledger_header/hash",
+            "value": "e3b7c6d28cce5da74fcbaae86714563864ca65e1e5104f89b997c3412769277d"
+          },
+          {
+            "field": "previous_ledger_hash",
+            "pointer": "/v2/ledger_header/header/previous_ledger_hash",
+            "value": "feb9671089936424bbe4c419026b7e83b9beb8c7c768307f036ce89a1c1d304a"
+          },
+          {
+            "field": "transaction_set_hash",
+            "pointer": "/v2/ledger_header/header/scp_value/tx_set_hash",
+            "value": "7aa2e22f8f667fd195087977cef9d2764e46348b8b100f05e396bfdb4fc336ca"
+          },
+          {
+            "field": "close_time",
+            "pointer": "/v2/ledger_header/header/scp_value/close_time",
+            "value": "1794873046"
+          },
+          {
+            "field": "close_time",
+            "pointer": "/v2/ledger_header/header/scp_value/ext/signed_ms/close_time_ms",
+            "value": "1794873046037"
+          },
+          {
+            "field": "consensus_signature",
+            "pointer": "/v2/ledger_header/header/scp_value/ext/signed_ms/lc_value_signature/signature",
+            "value": "65b75ec83858ad14bc275f87aba2d12c6da317dc0abf2d7c7c173dd307dad82cc335b37c2fb11cf4fc5795e67dae6409c0608a32dd1d6cee48be98f435fd9a06"
+          },
+          {
+            "field": "transaction_result_set_hash",
+            "pointer": "/v2/ledger_header/header/tx_set_result_hash",
+            "value": "87b3a85628f5bb1036835ed4cd481640961597e97af4bd639e1be4b3f175a772"
+          },
+          {
+            "field": "bucket_list_hash",
+            "pointer": "/v2/ledger_header/header/bucket_list_hash",
+            "value": "9e6d70ae341f68b93d3a873fd1901ae1e8e97b9664f65fe294d1882cad2d421a"
+          },
+          {
+            "field": "ledger_number",
+            "pointer": "/v2/ledger_header/header/ledger_seq",
+            "value": 28
+          },
+          {
+            "field": "fee_pool",
+            "pointer": "/v2/ledger_header/header/fee_pool",
+            "value": "10506787"
+          },
+          {
+            "field": "bucket_list_hash",
+            "pointer": "/v2/ledger_header/header/skip_list/0",
+            "value": "0000000000000000000000000000000000000000000000000000000000000000"
+          },
+          {
+            "field": "bucket_list_hash",
+            "pointer": "/v2/ledger_header/header/skip_list/1",
+            "value": "0000000000000000000000000000000000000000000000000000000000000000"
+          },
+          {
+            "field": "bucket_list_hash",
+            "pointer": "/v2/ledger_header/header/skip_list/2",
+            "value": "0000000000000000000000000000000000000000000000000000000000000000"
+          },
+          {
+            "field": "bucket_list_hash",
+            "pointer": "/v2/ledger_header/header/skip_list/3",
+            "value": "0000000000000000000000000000000000000000000000000000000000000000"
+          },
+          {
+            "field": "previous_ledger_hash",
+            "pointer": "/v2/tx_set/v1/previous_ledger_hash",
+            "value": "feb9671089936424bbe4c419026b7e83b9beb8c7c768307f036ce89a1c1d304a"
+          },
+          {
+            "field": "source_sequence_number",
+            "pointer": "/v2/tx_set/v1/phases/0/v0/0/txset_comp_txs_maybe_discounted_fee/txs/0/tx/tx/seq_num",
+            "value": "103079215105"
+          },
+          {
+            "field": "transaction_signature",
+            "pointer": "/v2/tx_set/v1/phases/0/v0/0/txset_comp_txs_maybe_discounted_fee/txs/0/tx/signatures/0/signature",
+            "value": "abf57c84d1ad214775d80f45b75843666634c8eee8989c975b713280f63fda3c870eeaf1b21a4d8b151caf14dcf51f8815f5ea25be188ee61c03d8a0c7df2305"
+          },
+          {
+            "field": "transaction_hash",
+            "pointer": "/v2/tx_processing/0/result/transaction_hash",
+            "value": "5e3dad5060984ea34837cdeec9390fb680a55d1817e037857974a29ba61d7032"
+          },
+          {
+            "field": "last_modified_ledger",
+            "pointer": "/v2/tx_processing/0/fee_processing/0/state/last_modified_ledger_seq",
+            "value": 24
+          },
+          {
+            "field": "source_sequence_number",
+            "pointer": "/v2/tx_processing/0/fee_processing/0/state/data/account/seq_num",
+            "value": "103079215104"
+          },
+          {
+            "field": "last_modified_ledger",
+            "pointer": "/v2/tx_processing/0/fee_processing/1/updated/last_modified_ledger_seq",
+            "value": 28
+          },
+          {
+            "field": "source_sequence_number",
+            "pointer": "/v2/tx_processing/0/fee_processing/1/updated/data/account/seq_num",
+            "value": "103079215104"
+          },
+          {
+            "field": "last_modified_ledger",
+            "pointer": "/v2/tx_processing/0/tx_apply_processing/v4/tx_changes_before/0/state/last_modified_ledger_seq",
+            "value": 28
+          },
+          {
+            "field": "source_sequence_number",
+            "pointer": "/v2/tx_processing/0/tx_apply_processing/v4/tx_changes_before/0/state/data/account/seq_num",
+            "value": "103079215104"
+          },
+          {
+            "field": "last_modified_ledger",
+            "pointer": "/v2/tx_processing/0/tx_apply_processing/v4/tx_changes_before/1/updated/last_modified_ledger_seq",
+            "value": 28
+          },
+          {
+            "field": "source_sequence_number",
+            "pointer": "/v2/tx_processing/0/tx_apply_processing/v4/tx_changes_before/1/updated/data/account/seq_num",
+            "value": "103079215105"
+          },
+          {
+            "field": "ledger_number",
+            "pointer": "/v2/tx_processing/0/tx_apply_processing/v4/tx_changes_before/1/updated/data/account/ext/v1/ext/v2/ext/v3/seq_ledger",
+            "value": 28
+          },
+          {
+            "field": "close_time",
+            "pointer": "/v2/tx_processing/0/tx_apply_processing/v4/tx_changes_before/1/updated/data/account/ext/v1/ext/v2/ext/v3/seq_time",
+            "value": "1794873046"
+          },
+          {
+            "field": "last_modified_ledger",
+            "pointer": "/v2/tx_processing/0/tx_apply_processing/v4/operations/0/changes/0/state/last_modified_ledger_seq",
+            "value": 28
+          },
+          {
+            "field": "source_sequence_number",
+            "pointer": "/v2/tx_processing/0/tx_apply_processing/v4/operations/0/changes/0/state/data/account/seq_num",
+            "value": "103079215105"
+          },
+          {
+            "field": "ledger_number",
+            "pointer": "/v2/tx_processing/0/tx_apply_processing/v4/operations/0/changes/0/state/data/account/ext/v1/ext/v2/ext/v3/seq_ledger",
+            "value": 28
+          },
+          {
+            "field": "close_time",
+            "pointer": "/v2/tx_processing/0/tx_apply_processing/v4/operations/0/changes/0/state/data/account/ext/v1/ext/v2/ext/v3/seq_time",
+            "value": "1794873046"
+          },
+          {
+            "field": "last_modified_ledger",
+            "pointer": "/v2/tx_processing/0/tx_apply_processing/v4/operations/0/changes/1/updated/last_modified_ledger_seq",
+            "value": 28
+          },
+          {
+            "field": "source_sequence_number",
+            "pointer": "/v2/tx_processing/0/tx_apply_processing/v4/operations/0/changes/1/updated/data/account/seq_num",
+            "value": "103079215105"
+          },
+          {
+            "field": "ledger_number",
+            "pointer": "/v2/tx_processing/0/tx_apply_processing/v4/operations/0/changes/1/updated/data/account/ext/v1/ext/v2/ext/v3/seq_ledger",
+            "value": 28
+          },
+          {
+            "field": "close_time",
+            "pointer": "/v2/tx_processing/0/tx_apply_processing/v4/operations/0/changes/1/updated/data/account/ext/v1/ext/v2/ext/v3/seq_time",
+            "value": "1794873046"
+          },
+          {
+            "field": "last_modified_ledger",
+            "pointer": "/v2/tx_processing/0/tx_apply_processing/v4/operations/0/changes/2/state/last_modified_ledger_seq",
+            "value": 26
+          },
+          {
+            "field": "source_sequence_number",
+            "pointer": "/v2/tx_processing/0/tx_apply_processing/v4/operations/0/changes/2/state/data/account/seq_num",
+            "value": "111669149696"
+          },
+          {
+            "field": "last_modified_ledger",
+            "pointer": "/v2/tx_processing/0/tx_apply_processing/v4/operations/0/changes/3/updated/last_modified_ledger_seq",
+            "value": 28
+          },
+          {
+            "field": "source_sequence_number",
+            "pointer": "/v2/tx_processing/0/tx_apply_processing/v4/operations/0/changes/3/updated/data/account/seq_num",
+            "value": "111669149696"
+          }
+        ]
+      },
+      "filePath": "cap-0027-muxed-account/entry.xdr",
+      "xdrType": "LedgerCloseMeta",
+      "sha256": "fdc7494f3693b7a28e7d284db23c5157d9ec2dbf482c7e48d0e5b3bcdaa8c255",
+      "length": 2244
+    }
+  ]
+}

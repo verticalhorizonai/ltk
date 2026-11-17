@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ListOutput",
+  "description": "Output of ltk list <folder> --json.",
+  "type": "array",
+  "items": { "$ref": "#/$defs/ListEntry" },
+  "$defs": {
+    "ListEntry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "cap", "protocolVersion", "xdrType", "length", "synthetic"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "cap": { "type": "string", "minLength": 1 },
+        "protocolVersion": { "type": "integer", "minimum": 1 },
+        "xdrType": { "type": "string", "minLength": 1 },
+        "length": { "type": "integer", "minimum": 0 },
+        "synthetic": { "type": "boolean" }
+      }
+    }
+  }
+}

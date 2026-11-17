@@ -1,0 +1,4 @@
+# XDR files are raw bytes: no line-ending conversion may alter them.
+*.xdr binary
+# JSON is written with LF on every platform.
+*.json text eol=lf

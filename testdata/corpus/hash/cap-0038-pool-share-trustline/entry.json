@@ -1,0 +1,178 @@
+{
+  "v2": {
+    "ext": "v0",
+    "ledger_header": {
+      "hash": "9aeec90b235622bb6a9fb84a09506b81f07b01ff6eacccfc95510ffa13c3c66b",
+      "header": {
+        "ledger_version": 28,
+        "previous_ledger_hash": "109c54611571e8c97cd77c9cdc24314bd0ac7cfc5cab5087317dd348bc1ab000",
+        "scp_value": {
+          "tx_set_hash": "cff38811dd68383de4e9a942b6e24995e79e1e32f5eb465f4defbdc9fc1458b3",
+          "close_time": "1794696789",
+          "upgrades": [],
+          "ext": {
+            "signed": {
+              "node_id": "GCTI6HMWRH2QGMFKWVU5M5ZSOTKL7P7JAHZDMJJBKDHGWTEC4CJ7O3DU",
+              "signature": "2f33de9d79f66a25029b516e54fb75d67aa93a0e0a26cdf49b6f177b73bf9e6c436a9947201e6281414fbe37043b227fd8b9f9077ac56cd59e5ee41507ad49f5"
+            }
+          }
+        },
+        "tx_set_result_hash": "c7158e6cfa08994ad2f899483c4d753de615d55445b6884883f691c02b9442a0",
+        "bucket_list_hash": "37389eee747d54656885d2b444fa2fc8143f1745da3676cac0dd1010a0d3677f",
+        "ledger_seq": 29,
+        "total_coins": "1000000000000000000",
+        "fee_pool": "10036710",
+        "base_fee": 100,
+        "ext": "v0"
+      },
+      "ext": "v0"
+    },
+    "tx_set": {
+      "v1": {
+        "previous_ledger_hash": "109c54611571e8c97cd77c9cdc24314bd0ac7cfc5cab5087317dd348bc1ab000",
+        "phases": [
+          {
+            "v0": [
+              {
+                "txset_comp_txs_maybe_discounted_fee": {
+                  "base_fee": "100",
+                  "txs": [
+                    {
+                      "tx": {
+                        "tx": {
+                          "source_account": "GB5W4EM3JCA56WVTR4ZTLMXEF3RUNAQSWLTP3E3MSXTMZEURRF6GKTKB",
+                          "fee": 100,
+                          "seq_num": "120259084289",
+                          "memo": "none",
+                          "operations": [
+                            {
+                              "source_account": null,
+                              "body": {
+                                "change_trust": {
+                                  "line": {
+                                    "pool_share": {
+                                      "liquidity_pool_constant_product": {
+                                        "asset_a": {
+                                          "credit_alphanum4": {
+                                            "asset_code": "USD",
+                                            "issuer": "GCG2JCL34VF4QCBY7EDPFQY54QAQ7QK62SB564FXQDIAL25LE5KCPEX4"
+                                          }
+                                        },
+                                        "asset_b": {
+                                          "credit_alphanum4": {
+                                            "asset_code": "USD",
+                                            "issuer": "GC7P7N7UYLS63YRQTZDAWBGZJ4F5EIWCBIJADQT4RSCXO6DZOORVFUZC"
+                                          }
+                                        },
+                                        "fee": 30
+                                      }
+                                    }
+                                  },
+                                  "limit": "9223372036854775807"
+                                }
+                              }
+                            }
+                          ],
+                          "ext": "v0"
+                        },
+                        "signatures": [
+                          {
+                            "hint": "3a964e6a",
+                            "signature": "1755d23c1efac9fc9d8b7acfca3ce267564aab48260448c67a8a73562f6e2595436a9947201e6281414fbe37043b227fd8b9f9077ac56cd59e5ee41507ad49f5"
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "v1": {
+              "base_fee": null,
+              "execution_stages": []
+            }
+          }
+        ]
+      }
+    },
+    "tx_processing": [
+      {
+        "ext": "v0",
+        "result": {
+          "transaction_hash": "bed60c54700a3a26aa177ac29900d1fd8f46488132b1f422e390cbf911131cd9",
+          "result": {
+            "fee_charged": "100",
+            "result": {
+              "tx_success": [
+                {
+                  "op_inner": {
+                    "change_trust": "success"
+                  }
+                }
+              ]
+            },
+            "ext": "v0"
+          }
+        },
+        "fee_processing": [
+          {
+            "state": {
+              "last_modified_ledger_seq": 28,
+              "data": {
+                "account": {
+                  "account_id": "GB5W4EM3JCA56WVTR4ZTLMXEF3RUNAQSWLTP3E3MSXTMZEURRF6GKTKB",
+                  "balance": "100000000000",
+                  "seq_num": "120259084288"
+                }
+              },
+              "ext": "v0"
+            }
+          }
+        ],
+        "tx_apply_processing": {
+          "v4": {
+            "ext": "v0",
+            "tx_changes_before": [],
+            "operations": [
+              {
+                "ext": "v0",
+                "changes": [
+                  {
+                    "created": {
+                      "last_modified_ledger_seq": 29,
+                      "data": {
+                        "trustline": {
+                          "account_id": "GB5W4EM3JCA56WVTR4ZTLMXEF3RUNAQSWLTP3E3MSXTMZEURRF6GKTKB",
+                          "asset": {
+                            "pool_share": "LCCUJUDDCBXZYWOGOLKQKGXH4ST24YQ4HDC5GTH7U4NS2UC6UJJOCT4O"
+                          },
+                          "balance": "0",
+                          "limit": "9223372036854775807",
+                          "flags": 0,
+                          "ext": "v0"
+                        }
+                      },
+                      "ext": "v0"
+                    }
+                  }
+                ],
+                "events": []
+              }
+            ],
+            "tx_changes_after": [],
+            "soroban_meta": null,
+            "events": [],
+            "diagnostic_events": []
+          }
+        },
+        "post_tx_apply_fee_processing": []
+      }
+    ],
+    "upgrades_processing": [],
+    "scp_info": [],
+    "total_byte_size_of_live_soroban_state": "31984",
+    "evicted_keys": []
+  }
+}

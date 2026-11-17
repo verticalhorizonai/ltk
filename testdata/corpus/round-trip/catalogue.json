@@ -1,0 +1,390 @@
+{
+  "entries": [
+    {
+      "id": "cap-0040-signed-payload-signer",
+      "cap": "CAP-0040",
+      "protocolVersion": 30,
+      "protocolFallback": false,
+      "source": "test fixture of internal/catalogue/fixtures_test.go: decoded JSON shaped like the Rust XDR tool's decoding of a LedgerCloseMeta, and bytes that are not XDR",
+      "synthetic": false,
+      "expectedDecodedValues": {
+        "reproducedByEveryRun": [
+          {
+            "pointer": "/v2/tx_set/v1/phases/0/v0/0/txset_comp_txs_maybe_discounted_fee/txs/0/tx/tx/source_account",
+            "value": "GB2BZ47Y6KVOVLNUZSKDQHZ2VM2ZNSWWJNJHTPAFZXK26N2CVMSF4HNJ"
+          },
+          {
+            "pointer": "/v2/tx_set/v1/phases/0/v0/0/txset_comp_txs_maybe_discounted_fee/txs/0/tx/tx/operations/0/body/set_options/signer/key",
+            "value": "PDUII3XUZ7DKZRPOVBDBE2PLIWHL26EXSEMNMNPNT5VI4UQYJKGGUAAAAAOX4GUACND5JH3IRHOCPMGLCWFCBOK74MUWYUSRPYZ4ZAIFOYAAAAG2RQ"
+          },
+          {
+            "pointer": "/v2/tx_set/v1/phases/0/v0/0/txset_comp_txs_maybe_discounted_fee/txs/0/tx/tx/operations/0/body/set_options/signer/weight",
+            "value": 1
+          },
+          {
+            "pointer": "/v2/tx_processing/0/result/result/result/tx_success/0/op_inner/set_options",
+            "value": "success"
+          },
+          {
+            "pointer": "/v2/tx_processing/0/tx_apply_processing/v4/operations/0/changes/0/updated/data/account/signers/0/key",
+            "value": "PDUII3XUZ7DKZRPOVBDBE2PLIWHL26EXSEMNMNPNT5VI4UQYJKGGUAAAAAOX4GUACND5JH3IRHOCPMGLCWFCBOK74MUWYUSRPYZ4ZAIFOYAAAAG2RQ"
+          }
+        ],
+        "ledgerDependent": [
+          {
+            "field": "ledger_hash",
+            "pointer": "/v2/ledger_header/hash",
+            "value": "71b91b18d4bcd68353aa5355d0946d27e6f98152c173dc7e114446204c0c10fd"
+          },
+          {
+            "field": "previous_ledger_hash",
+            "pointer": "/v2/ledger_header/header/previous_ledger_hash",
+            "value": "0b00f370cdf47d3e00d8ef902cfa606858fec570a7630f6bc1784548a41d0910"
+          },
+          {
+            "field": "transaction_set_hash",
+            "pointer": "/v2/ledger_header/header/scp_value/tx_set_hash",
+            "value": "fa4fdace7a0bc293f4857c23891c40a6b73e42101213b044fb16bbd865500e56"
+          },
+          {
+            "field": "close_time",
+            "pointer": "/v2/ledger_header/header/scp_value/close_time",
+            "value": "1794696789"
+          },
+          {
+            "field": "consensus_signature",
+            "pointer": "/v2/ledger_header/header/scp_value/ext/signed/signature",
+            "value": "f5ed437480573b4d7570f6a676727905c827bb0990fb4d808864497d39ce34ce2b79d2e971a9590d7a65a597921ab3cf51b7c4e5525e22bab029fee8e7ae1c7a"
+          },
+          {
+            "field": "transaction_result_set_hash",
+            "pointer": "/v2/ledger_header/header/tx_set_result_hash",
+            "value": "869962b821008a137c86c31f717b9fb21b709bc4a12a8301714d6726b2636ccf"
+          },
+          {
+            "field": "bucket_list_hash",
+            "pointer": "/v2/ledger_header/header/bucket_list_hash",
+            "value": "9dd2ec6777fe7752d393a5cca4e4bc92c495380bcda8d82713b784527dab84f8"
+          },
+          {
+            "field": "ledger_number",
+            "pointer": "/v2/ledger_header/header/ledger_seq",
+            "value": 29
+          },
+          {
+            "field": "fee_pool",
+            "pointer": "/v2/ledger_header/header/fee_pool",
+            "value": "10036710"
+          },
+          {
+            "field": "previous_ledger_hash",
+            "pointer": "/v2/tx_set/v1/previous_ledger_hash",
+            "value": "0b00f370cdf47d3e00d8ef902cfa606858fec570a7630f6bc1784548a41d0910"
+          },
+          {
+            "field": "source_sequence_number",
+            "pointer": "/v2/tx_set/v1/phases/0/v0/0/txset_comp_txs_maybe_discounted_fee/txs/0/tx/tx/seq_num",
+            "value": "120259084289"
+          },
+          {
+            "field": "transaction_signature",
+            "pointer": "/v2/tx_set/v1/phases/0/v0/0/txset_comp_txs_maybe_discounted_fee/txs/0/tx/signatures/0/signature",
+            "value": "024bb41942be77694cfbf8f0c9eb64050c6c443b927cd750219f81a1e4f8709f2b79d2e971a9590d7a65a597921ab3cf51b7c4e5525e22bab029fee8e7ae1c7a"
+          },
+          {
+            "field": "transaction_hash",
+            "pointer": "/v2/tx_processing/0/result/transaction_hash",
+            "value": "2f4cc387402bd58a96dffa106aa318004d7540e1115b1a7d3112bf2bc2a289be"
+          },
+          {
+            "field": "last_modified_ledger",
+            "pointer": "/v2/tx_processing/0/fee_processing/0/state/last_modified_ledger_seq",
+            "value": 28
+          },
+          {
+            "field": "source_sequence_number",
+            "pointer": "/v2/tx_processing/0/fee_processing/0/state/data/account/seq_num",
+            "value": "120259084288"
+          },
+          {
+            "field": "last_modified_ledger",
+            "pointer": "/v2/tx_processing/0/tx_apply_processing/v4/operations/0/changes/0/updated/last_modified_ledger_seq",
+            "value": 29
+          },
+          {
+            "field": "source_sequence_number",
+            "pointer": "/v2/tx_processing/0/tx_apply_processing/v4/operations/0/changes/0/updated/data/account/seq_num",
+            "value": "120259084289"
+          },
+          {
+            "field": "ledger_number",
+            "pointer": "/v2/tx_processing/0/tx_apply_processing/v4/operations/0/changes/0/updated/data/account/ext/v1/ext/v2/ext/v3/seq_ledger",
+            "value": 29
+          },
+          {
+            "field": "close_time",
+            "pointer": "/v2/tx_processing/0/tx_apply_processing/v4/operations/0/changes/0/updated/data/account/ext/v1/ext/v2/ext/v3/seq_time",
+            "value": "1794696789"
+          }
+        ]
+      },
+      "filePath": "cap-0040-signed-payload-signer/entry.xdr",
+      "xdrType": "LedgerCloseMeta",
+      "sha256": "b8ee211402e96c099abf34b21715dd29e63bd61e2534164bdb30b7bf1f2ed381",
+      "length": 1920
+    },
+    {
+      "id": "cap-0038-pool-share-trustline",
+      "cap": "CAP-0038",
+      "protocolVersion": 28,
+      "protocolFallback": true,
+      "source": "test fixture of internal/catalogue/fixtures_test.go: decoded JSON shaped like the Rust XDR tool's decoding of a LedgerCloseMeta, and bytes that are not XDR",
+      "synthetic": false,
+      "expectedDecodedValues": {
+        "reproducedByEveryRun": [
+          {
+            "pointer": "/v2/tx_set/v1/phases/0/v0/0/txset_comp_txs_maybe_discounted_fee/txs/0/tx/tx/source_account",
+            "value": "GB5W4EM3JCA56WVTR4ZTLMXEF3RUNAQSWLTP3E3MSXTMZEURRF6GKTKB"
+          },
+          {
+            "pointer": "/v2/tx_set/v1/phases/0/v0/0/txset_comp_txs_maybe_discounted_fee/txs/0/tx/tx/operations/0/body/change_trust/line/pool_share/liquidity_pool_constant_product/asset_a/credit_alphanum4/asset_code",
+            "value": "USD"
+          },
+          {
+            "pointer": "/v2/tx_set/v1/phases/0/v0/0/txset_comp_txs_maybe_discounted_fee/txs/0/tx/tx/operations/0/body/change_trust/line/pool_share/liquidity_pool_constant_product/asset_a/credit_alphanum4/issuer",
+            "value": "GCG2JCL34VF4QCBY7EDPFQY54QAQ7QK62SB564FXQDIAL25LE5KCPEX4"
+          },
+          {
+            "pointer": "/v2/tx_set/v1/phases/0/v0/0/txset_comp_txs_maybe_discounted_fee/txs/0/tx/tx/operations/0/body/change_trust/line/pool_share/liquidity_pool_constant_product/asset_b/credit_alphanum4/asset_code",
+            "value": "USD"
+          },
+          {
+            "pointer": "/v2/tx_set/v1/phases/0/v0/0/txset_comp_txs_maybe_discounted_fee/txs/0/tx/tx/operations/0/body/change_trust/line/pool_share/liquidity_pool_constant_product/asset_b/credit_alphanum4/issuer",
+            "value": "GC7P7N7UYLS63YRQTZDAWBGZJ4F5EIWCBIJADQT4RSCXO6DZOORVFUZC"
+          },
+          {
+            "pointer": "/v2/tx_set/v1/phases/0/v0/0/txset_comp_txs_maybe_discounted_fee/txs/0/tx/tx/operations/0/body/change_trust/line/pool_share/liquidity_pool_constant_product/fee",
+            "value": 30
+          },
+          {
+            "pointer": "/v2/tx_processing/0/result/result/result/tx_success/0/op_inner/change_trust",
+            "value": "success"
+          }
+        ],
+        "ledgerDependent": [
+          {
+            "field": "ledger_hash",
+            "pointer": "/v2/ledger_header/hash",
+            "value": "9aeec90b235622bb6a9fb84a09506b81f07b01ff6eacccfc95510ffa13c3c66b"
+          },
+          {
+            "field": "previous_ledger_hash",
+            "pointer": "/v2/ledger_header/header/previous_ledger_hash",
+            "value": "109c54611571e8c97cd77c9cdc24314bd0ac7cfc5cab5087317dd348bc1ab000"
+          },
+          {
+            "field": "transaction_set_hash",
+            "pointer": "/v2/ledger_header/header/scp_value/tx_set_hash",
+            "value": "cff38811dd68383de4e9a942b6e24995e79e1e32f5eb465f4defbdc9fc1458b3"
+          },
+          {
+            "field": "close_time",
+            "pointer": "/v2/ledger_header/header/scp_value/close_time",
+            "value": "1794696789"
+          },
+          {
+            "field": "consensus_signature",
+            "pointer": "/v2/ledger_header/header/scp_value/ext/signed/signature",
+            "value": "2f33de9d79f66a25029b516e54fb75d67aa93a0e0a26cdf49b6f177b73bf9e6c436a9947201e6281414fbe37043b227fd8b9f9077ac56cd59e5ee41507ad49f5"
+          },
+          {
+            "field": "transaction_result_set_hash",
+            "pointer": "/v2/ledger_header/header/tx_set_result_hash",
+            "value": "c7158e6cfa08994ad2f899483c4d753de615d55445b6884883f691c02b9442a0"
+          },
+          {
+            "field": "bucket_list_hash",
+            "pointer": "/v2/ledger_header/header/bucket_list_hash",
+            "value": "37389eee747d54656885d2b444fa2fc8143f1745da3676cac0dd1010a0d3677f"
+          },
+          {
+            "field": "ledger_number",
+            "pointer": "/v2/ledger_header/header/ledger_seq",
+            "value": 29
+          },
+          {
+            "field": "fee_pool",
+            "pointer": "/v2/ledger_header/header/fee_pool",
+            "value": "10036710"
+          },
+          {
+            "field": "previous_ledger_hash",
+            "pointer": "/v2/tx_set/v1/previous_ledger_hash",
+            "value": "109c54611571e8c97cd77c9cdc24314bd0ac7cfc5cab5087317dd348bc1ab000"
+          },
+          {
+            "field": "source_sequence_number",
+            "pointer": "/v2/tx_set/v1/phases/0/v0/0/txset_comp_txs_maybe_discounted_fee/txs/0/tx/tx/seq_num",
+            "value": "120259084289"
+          },
+          {
+            "field": "transaction_signature",
+            "pointer": "/v2/tx_set/v1/phases/0/v0/0/txset_comp_txs_maybe_discounted_fee/txs/0/tx/signatures/0/signature",
+            "value": "1755d23c1efac9fc9d8b7acfca3ce267564aab48260448c67a8a73562f6e2595436a9947201e6281414fbe37043b227fd8b9f9077ac56cd59e5ee41507ad49f5"
+          },
+          {
+            "field": "transaction_hash",
+            "pointer": "/v2/tx_processing/0/result/transaction_hash",
+            "value": "bed60c54700a3a26aa177ac29900d1fd8f46488132b1f422e390cbf911131cd9"
+          },
+          {
+            "field": "last_modified_ledger",
+            "pointer": "/v2/tx_processing/0/fee_processing/0/state/last_modified_ledger_seq",
+            "value": 28
+          },
+          {
+            "field": "source_sequence_number",
+            "pointer": "/v2/tx_processing/0/fee_processing/0/state/data/account/seq_num",
+            "value": "120259084288"
+          },
+          {
+            "field": "last_modified_ledger",
+            "pointer": "/v2/tx_processing/0/tx_apply_processing/v4/operations/0/changes/0/created/last_modified_ledger_seq",
+            "value": 29
+          }
+        ]
+      },
+      "filePath": "cap-0038-pool-share-trustline/entry.xdr",
+      "xdrType": "LedgerCloseMeta",
+      "sha256": "0ab21d6f119c944e79aa0919a78a5b566c2e886e2b207d563a8b8ebf067893ee",
+      "length": 2816,
+      "networkRefusalEvidence": {
+        "submittedEnvelopeXdr": "AAAAAgAAAABHkNor3ig51PdlHkIM4Y2NM3dLEk4QZcsGgutgDbA4bAAAAGQAAAAiAAAAAwAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAABgAAAAMAAAAAAAAAAVVTRAAAAAAAP8C+p0Z0AnwzxH9Rb0Dno52w/xg/BHtR0MEYc8n+2CwAAAABVVNEAAAAAAAeFJFtRyqAPNR7qoSWtFvKor9CHvlxnFd0g4dQ3SPlhQAAAB5//////////wAAAAAAAAABDbA4bAAAAED90nNIEQOzH4TiUGJfNzNZ7PSNqdXjYxwTV+jQvUczLKmFmf24VwmitXzRrlWJY0qSkUiwZED7UK/MhRBOr9MN",
+        "resultCode": "CHANGE_TRUST_MALFORMED"
+      }
+    },
+    {
+      "id": "cap-0027-muxed-account",
+      "cap": "CAP-0027",
+      "protocolVersion": 30,
+      "protocolFallback": false,
+      "source": "test fixture of internal/catalogue/fixtures_test.go: decoded JSON shaped like the Rust XDR tool's decoding of a LedgerCloseMeta, and bytes that are not XDR",
+      "synthetic": false,
+      "expectedDecodedValues": {
+        "reproducedByEveryRun": [
+          {
+            "pointer": "/v2/tx_set/v1/phases/0/v0/0/txset_comp_txs_maybe_discounted_fee/txs/0/tx/tx/source_account",
+            "value": "MA7QYNF7SOWQ3GLR2BGMZEHXAVIRZA4KVWLTJJFC7MGXUA74P7UJUAAAAAAAAAAAAGZFQ"
+          },
+          {
+            "pointer": "/v2/tx_set/v1/phases/0/v0/0/txset_comp_txs_maybe_discounted_fee/txs/0/tx/tx/operations/0/body/payment/destination",
+            "value": "MA7QYNF7SOWQ3GLR2BGMZEHXAVIRZA4KVWLTJJFC7MGXUA74P7UJVAAAAAAAAAAAAAJLK"
+          },
+          {
+            "pointer": "/v2/tx_set/v1/phases/0/v0/0/txset_comp_txs_maybe_discounted_fee/txs/0/tx/tx/operations/0/body/payment/asset",
+            "value": "native"
+          },
+          {
+            "pointer": "/v2/tx_set/v1/phases/0/v0/0/txset_comp_txs_maybe_discounted_fee/txs/0/tx/tx/operations/0/body/payment/amount",
+            "value": "10000000"
+          },
+          {
+            "pointer": "/v2/tx_processing/0/result/result/result/tx_success/0/op_inner/payment",
+            "value": "success"
+          }
+        ],
+        "ledgerDependent": [
+          {
+            "field": "ledger_hash",
+            "pointer": "/v2/ledger_header/hash",
+            "value": "26c729d57020a4a4d9e84661fedb38900a30bb15ee7a0c84c84d85b09cec0d2e"
+          },
+          {
+            "field": "previous_ledger_hash",
+            "pointer": "/v2/ledger_header/header/previous_ledger_hash",
+            "value": "2c0ae782edb69f26c08c721443e3bed93ebe0abcfd704b6bd71c2fd35a73d9a7"
+          },
+          {
+            "field": "transaction_set_hash",
+            "pointer": "/v2/ledger_header/header/scp_value/tx_set_hash",
+            "value": "ac946263a4510401ba132e77fc86591c99774cb806971dbe2d1d7806cbb89a5c"
+          },
+          {
+            "field": "close_time",
+            "pointer": "/v2/ledger_header/header/scp_value/close_time",
+            "value": "1794696789"
+          },
+          {
+            "field": "consensus_signature",
+            "pointer": "/v2/ledger_header/header/scp_value/ext/signed/signature",
+            "value": "537641f11b4334cd850450ebed221335cbb6ec898d734051daa568d41a9e6c7461d4d1fbac902eb12203d6133460dd1ac2d5dd4fd93e38c4aeaca4a14b5dd219"
+          },
+          {
+            "field": "transaction_result_set_hash",
+            "pointer": "/v2/ledger_header/header/tx_set_result_hash",
+            "value": "da226eec3aff220c6154bf47f0f6c36b671ed612183e699d625488fdf4a76aa5"
+          },
+          {
+            "field": "bucket_list_hash",
+            "pointer": "/v2/ledger_header/header/bucket_list_hash",
+            "value": "d01f82bf836790a94750db05fbad0caad2e9bc70ea8a25a6f2d590130ab046ab"
+          },
+          {
+            "field": "ledger_number",
+            "pointer": "/v2/ledger_header/header/ledger_seq",
+            "value": 29
+          },
+          {
+            "field": "fee_pool",
+            "pointer": "/v2/ledger_header/header/fee_pool",
+            "value": "10036710"
+          },
+          {
+            "field": "previous_ledger_hash",
+            "pointer": "/v2/tx_set/v1/previous_ledger_hash",
+            "value": "2c0ae782edb69f26c08c721443e3bed93ebe0abcfd704b6bd71c2fd35a73d9a7"
+          },
+          {
+            "field": "source_sequence_number",
+            "pointer": "/v2/tx_set/v1/phases/0/v0/0/txset_comp_txs_maybe_discounted_fee/txs/0/tx/tx/seq_num",
+            "value": "120259084289"
+          },
+          {
+            "field": "transaction_signature",
+            "pointer": "/v2/tx_set/v1/phases/0/v0/0/txset_comp_txs_maybe_discounted_fee/txs/0/tx/signatures/0/signature",
+            "value": "e5466ad25b8feeae789b13ab763ac78dd2882e038d52d5a6a55224bc8062aa3d61d4d1fbac902eb12203d6133460dd1ac2d5dd4fd93e38c4aeaca4a14b5dd219"
+          },
+          {
+            "field": "transaction_hash",
+            "pointer": "/v2/tx_processing/0/result/transaction_hash",
+            "value": "e594540a087c24ca8f3f844a2d07080a74a76a77574d98c3543074370535fce6"
+          },
+          {
+            "field": "last_modified_ledger",
+            "pointer": "/v2/tx_processing/0/fee_processing/0/state/last_modified_ledger_seq",
+            "value": 28
+          },
+          {
+            "field": "source_sequence_number",
+            "pointer": "/v2/tx_processing/0/fee_processing/0/state/data/account/seq_num",
+            "value": "120259084288"
+          },
+          {
+            "field": "last_modified_ledger",
+            "pointer": "/v2/tx_processing/0/tx_apply_processing/v4/operations/0/changes/0/updated/last_modified_ledger_seq",
+            "value": 29
+          },
+          {
+            "field": "source_sequence_number",
+            "pointer": "/v2/tx_processing/0/tx_apply_processing/v4/operations/0/changes/0/updated/data/account/seq_num",
+            "value": "120259084289"
+          }
+        ]
+      },
+      "filePath": "cap-0027-muxed-account/entry.xdr",
+      "xdrType": "LedgerCloseMeta",
+      "sha256": "01ea454a78cff37c9784e33b0c129e8c267d77351e4ed77b9d982d3c8334bed8",
+      "length": 2056
+    }
+  ]
+}

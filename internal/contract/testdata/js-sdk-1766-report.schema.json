@@ -1,0 +1,170 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "JsSdk1766Report",
+  "description": "Output of ltk repro js-sdk-1766, saved as repro/js-sdk-1766.json.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["target", "versions", "passed"],
+  "properties": {
+    "target": { "type": "string", "const": "js-sdk-1766" },
+    "versions": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 2,
+      "prefixItems": [
+        {
+          "allOf": [
+            { "$ref": "#/$defs/SdkVersionResult" },
+            {
+              "properties": {
+                "version": { "const": "17.2.0" },
+                "role": { "const": "before_fix" }
+              }
+            }
+          ]
+        },
+        {
+          "allOf": [
+            { "$ref": "#/$defs/SdkVersionResult" },
+            {
+              "properties": {
+                "version": { "const": "17.2.1" },
+                "role": { "const": "fix" }
+              }
+            }
+          ]
+        }
+      ],
+      "items": false
+    },
+    "passed": { "type": "boolean" }
+  },
+  "if": {
+    "required": ["passed"],
+    "properties": { "passed": { "const": true } }
+  },
+  "then": {
+    "properties": {
+      "versions": {
+        "prefixItems": [
+          {
+            "properties": {
+              "steps": {
+                "contains": { "properties": { "passed": { "const": false } } }
+              }
+            }
+          },
+          {
+            "properties": {
+              "roundTripIdentical": { "const": true },
+              "steps": {
+                "minItems": 3,
+                "not": {
+                  "contains": { "properties": { "passed": { "const": false } } }
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "$defs": {
+    "SdkVersion": {
+      "type": "string",
+      "enum": ["17.2.0", "17.2.1"]
+    },
+    "FixRole": {
+      "type": "string",
+      "enum": ["before_fix", "fix"]
+    },
+    "SdkReproStep": {
+      "type": "string",
+      "enum": ["build", "decode", "re_encode"]
+    },
+    "SdkStepResult": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["step", "passed", "error"],
+      "properties": {
+        "step": { "$ref": "#/$defs/SdkReproStep" },
+        "passed": { "type": "boolean" },
+        "error": { "type": ["string", "null"] }
+      },
+      "if": {
+        "required": ["passed"],
+        "properties": { "passed": { "const": true } }
+      },
+      "then": { "properties": { "error": { "type": "null" } } },
+      "else": { "properties": { "error": { "type": "string", "minLength": 1 } } }
+    },
+    "SdkVersionResult": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["version", "role", "steps", "roundTripIdentical"],
+      "properties": {
+        "version": { "$ref": "#/$defs/SdkVersion" },
+        "role": { "$ref": "#/$defs/FixRole" },
+        "steps": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 3,
+          "prefixItems": [
+            {
+              "allOf": [
+                { "$ref": "#/$defs/SdkStepResult" },
+                { "properties": { "step": { "const": "build" } } }
+              ]
+            },
+            {
+              "allOf": [
+                { "$ref": "#/$defs/SdkStepResult" },
+                { "properties": { "step": { "const": "decode" } } }
+              ]
+            },
+            {
+              "allOf": [
+                { "$ref": "#/$defs/SdkStepResult" },
+                { "properties": { "step": { "const": "re_encode" } } }
+              ]
+            }
+          ],
+          "items": false
+        },
+        "roundTripIdentical": { "type": "boolean" }
+      },
+      "allOf": [
+        {
+          "if": {
+            "required": ["version"],
+            "properties": { "version": { "const": "17.2.0" } }
+          },
+          "then": { "properties": { "role": { "const": "before_fix" } } }
+        },
+        {
+          "if": {
+            "required": ["version"],
+            "properties": { "version": { "const": "17.2.1" } }
+          },
+          "then": { "properties": { "role": { "const": "fix" } } }
+        },
+        {
+          "if": {
+            "required": ["roundTripIdentical"],
+            "properties": { "roundTripIdentical": { "const": true } }
+          },
+          "then": {
+            "properties": {
+              "steps": {
+                "minItems": 3,
+                "not": {
+                  "contains": { "properties": { "passed": { "const": false } } }
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

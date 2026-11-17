@@ -1,0 +1,97 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "CompareReport",
+  "description": "Output of ltk compare <folder A> <folder B>.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["folderA", "folderB", "entries", "passed"],
+  "properties": {
+    "folderA": { "type": "string", "minLength": 1 },
+    "folderB": { "type": "string", "minLength": 1 },
+    "entries": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/EntryComparison" }
+    },
+    "passed": { "type": "boolean" }
+  },
+  "if": {
+    "required": ["passed"],
+    "properties": { "passed": { "const": true } }
+  },
+  "then": {
+    "properties": {
+      "entries": {
+        "items": {
+          "properties": {
+            "differ": {
+              "items": {
+                "properties": {
+                  "ledgerDependentField": { "not": { "type": "null" } }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "JsonValue": {
+      "description": "Any JSON value."
+    },
+    "JsonPointer": {
+      "type": "string",
+      "pattern": "^(/([^~/]|~[01])*)*$"
+    },
+    "LedgerDependentField": {
+      "type": "string",
+      "enum": [
+        "ledger_number",
+        "close_time",
+        "previous_ledger_hash",
+        "bucket_list_hash",
+        "transaction_set_hash",
+        "consensus_signature",
+        "fee_pool",
+        "last_modified_ledger",
+        "source_sequence_number",
+        "transaction_signature",
+        "transaction_hash",
+        "ledger_hash",
+        "transaction_result_set_hash"
+      ]
+    },
+    "FieldDifference": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["pointer", "ledgerDependentField", "valueA", "valueB"],
+      "properties": {
+        "pointer": { "$ref": "#/$defs/JsonPointer" },
+        "ledgerDependentField": {
+          "anyOf": [
+            { "type": "null" },
+            { "$ref": "#/$defs/LedgerDependentField" }
+          ]
+        },
+        "valueA": { "$ref": "#/$defs/JsonValue" },
+        "valueB": { "$ref": "#/$defs/JsonValue" }
+      }
+    },
+    "EntryComparison": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "equal", "differ"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "equal": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/JsonPointer" }
+        },
+        "differ": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/FieldDifference" }
+        }
+      }
+    }
+  }
+}

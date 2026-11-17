@@ -1,0 +1,160 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "CheckReport",
+  "description": "Output of ltk check <folder> [--also-go].",
+  "$ref": "#/$defs/CheckReport",
+  "$defs": {
+    "JsonValue": {
+      "description": "Any JSON value."
+    },
+    "JsonPointer": {
+      "type": "string",
+      "pattern": "^(/([^~/]|~[01])*)*$"
+    },
+    "SchemaFailure": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["pointer", "message"],
+      "properties": {
+        "pointer": { "$ref": "#/$defs/JsonPointer" },
+        "message": { "type": "string", "minLength": 1 }
+      }
+    },
+    "CatalogueSchemaResult": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["check", "passed", "failures"],
+      "properties": {
+        "check": { "type": "string", "const": "catalogue_schema" },
+        "passed": { "type": "boolean" },
+        "failures": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/SchemaFailure" }
+        }
+      },
+      "if": {
+        "required": ["passed"],
+        "properties": { "passed": { "const": true } }
+      },
+      "then": { "properties": { "failures": { "maxItems": 0 } } },
+      "else": { "properties": { "failures": { "minItems": 1 } } }
+    },
+    "FileIntegrityResult": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["check", "passed", "sha256", "length", "recordedSha256", "recordedLength"],
+      "properties": {
+        "check": { "type": "string", "const": "file_integrity" },
+        "passed": { "type": "boolean" },
+        "sha256": { "type": "string", "pattern": "^([0-9a-f]{64})?$" },
+        "length": { "type": "integer", "minimum": 0 },
+        "recordedSha256": { "type": "string" },
+        "recordedLength": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "RoundTripResult": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["check", "passed", "bytesCompared"],
+      "properties": {
+        "check": { "type": "string", "const": "round_trip" },
+        "passed": { "type": "boolean" },
+        "bytesCompared": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "ValueMismatch": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["pointer", "recorded", "decoded"],
+      "properties": {
+        "pointer": { "$ref": "#/$defs/JsonPointer" },
+        "recorded": { "$ref": "#/$defs/JsonValue" },
+        "decoded": { "$ref": "#/$defs/JsonValue" }
+      }
+    },
+    "ExpectedValuesResult": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["check", "passed", "mismatches"],
+      "properties": {
+        "check": { "type": "string", "const": "expected_values" },
+        "passed": { "type": "boolean" },
+        "mismatches": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/ValueMismatch" }
+        }
+      },
+      "if": {
+        "required": ["passed"],
+        "properties": { "passed": { "const": true } }
+      },
+      "then": { "properties": { "mismatches": { "maxItems": 0 } } },
+      "else": { "properties": { "mismatches": { "minItems": 1 } } }
+    },
+    "GoSdkRoundTripResult": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["check", "passed", "bytesCompared"],
+      "properties": {
+        "check": { "type": "string", "const": "go_sdk_round_trip" },
+        "passed": { "type": "boolean" },
+        "bytesCompared": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "EntryCheckResult": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "fileIntegrity", "roundTrip", "expectedValues", "goSdkRoundTrip"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "fileIntegrity": { "$ref": "#/$defs/FileIntegrityResult" },
+        "roundTrip": { "$ref": "#/$defs/RoundTripResult" },
+        "expectedValues": { "$ref": "#/$defs/ExpectedValuesResult" },
+        "goSdkRoundTrip": {
+          "anyOf": [
+            { "type": "null" },
+            { "$ref": "#/$defs/GoSdkRoundTripResult" }
+          ]
+        }
+      }
+    },
+    "CheckReport": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["folder", "catalogueSchema", "entries", "passed"],
+      "properties": {
+        "folder": { "type": "string", "minLength": 1 },
+        "catalogueSchema": { "$ref": "#/$defs/CatalogueSchemaResult" },
+        "entries": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/EntryCheckResult" }
+        },
+        "passed": { "type": "boolean" }
+      },
+      "if": {
+        "required": ["passed"],
+        "properties": { "passed": { "const": true } }
+      },
+      "then": {
+        "properties": {
+          "catalogueSchema": { "properties": { "passed": { "const": true } } },
+          "entries": {
+            "items": {
+              "properties": {
+                "fileIntegrity": { "properties": { "passed": { "const": true } } },
+                "roundTrip": { "properties": { "passed": { "const": true } } },
+                "expectedValues": { "properties": { "passed": { "const": true } } },
+                "goSdkRoundTrip": {
+                  "anyOf": [
+                    { "type": "null" },
+                    { "properties": { "passed": { "const": true } } }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

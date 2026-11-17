@@ -1,0 +1,10 @@
+2026-11-14T22:53:04.559000000Z time="2026-11-14T22:53:04.559Z" level=info msg="📦 Git Commit: 2c873353c1f0f3c9b145e25a7d009023ad104a1c" pid=7
+2026-11-14T22:53:04.559000000Z time="2026-11-14T22:53:04.559Z" level=info msg="📦 Version: 0.2.0" pid=7
+2026-11-14T22:53:04.657000000Z time="2026-11-14T22:53:04.657Z" level=info msg="Successfully applied 17 migrations up." pid=7
+2026-11-14T22:53:04.790000000Z time="2026-11-14T22:53:04.790Z" level=info msg="Starting ingestion from ledger: 23" pid=1
+2026-11-14T22:53:08.864000000Z time="2026-11-14T22:53:08.864Z" level=info msg="Ingested ledger 27 in 0.0086s" pid=1
+2026-11-14T22:53:08.905000000Z time="2026-11-14T22:53:08.905Z" level=info msg="Ingested ledger 28 in 0.0394s" pid=1
+2026-11-14T22:53:10.949000000Z time="2026-11-14T22:53:10.949Z" level=debug msg="✅ inserted 1 txs, 1 ops, 2 state_changes" pid=1
+2026-11-14T22:53:10.951000000Z time="2026-11-14T22:53:10.951Z" level=info msg="Ingested ledger 29 in 0.0180s" pid=1
+2026-11-14T22:53:10.952000000Z time="2026-11-14T22:53:10.952Z" level=info msg="Ingested ledger 30 in 0.0007s" pid=1
+2026-11-14T22:53:12.993000000Z time="2026-11-14T22:53:12.993Z" level=info msg="Ingested ledger 31 in 0.0113s" pid=1

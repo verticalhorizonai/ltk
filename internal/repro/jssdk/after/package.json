@@ -1,0 +1,10 @@
+{
+  "name": "ltk-repro-js-sdk-1766-after",
+  "version": "0.0.0",
+  "private": true,
+  "description": "js-stellar-sdk 1766 reproduction, the release with the fix: run by ltk repro js-sdk-1766, never published",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "@stellar/stellar-sdk": "17.2.1"
+  }
+}
