@@ -475,6 +475,104 @@ func TestReadmeHasNoDeclarationLines(t *testing.T) {
 	}
 }
 
+// readmeExitCodesHeader is the header of the Conventions' table of exit codes.
+const readmeExitCodesHeader = "| Exit | `code` on standard error | Meaning |"
+
+// TestReadmeExitCodesAreThePrograms: the Conventions' table of exit codes names each non-zero exit by the `code` the
+// program writes on its error line (the exit-code mapper's own map, exitCodeOf), and exit 0 by no code at all; the
+// notation's key names, which the program never prints, are not used.
+func TestReadmeExitCodesAreThePrograms(t *testing.T) {
+	text := readReadme(t)
+	// The table sits in a list item, indented by two spaces.
+	conventions := strings.ReplaceAll(readmeSection(t, text, "## Conventions"), "\n  |", "\n|")
+	rows := readmeTableRows(conventions, readmeExitCodesHeader)
+	if len(rows) != len(exitCodeOf)+1 {
+		t.Fatalf("the exit-code table has %d rows, want exit 0 and the program's %d error codes", len(rows), len(exitCodeOf))
+	}
+	byExit := map[string][]string{}
+	for _, row := range rows {
+		if len(row) != 3 {
+			t.Fatalf("the exit-code table's row %q has %d cells, want 3", row, len(row))
+		}
+		byExit[row[0]] = row
+	}
+	if row, ok := byExit[fmt.Sprintf("`%d`", contract.EXIT_CODES.Success)]; !ok || strings.Contains(row[1], "`") {
+		t.Errorf("the exit-code table's row for exit %d is %q; want one that names no code (nothing is written)", contract.EXIT_CODES.Success, row)
+	}
+	for code, exit := range exitCodeOf {
+		row, ok := byExit[fmt.Sprintf("`%d`", exit)]
+		if !ok || row[1] != "`"+string(code)+"`" {
+			t.Errorf("the exit-code table's row for exit %d is %q; the program writes the code %q", exit, row, code)
+		}
+	}
+	for _, name := range []string{"`usageError`", "`environmentMissing`"} {
+		if strings.Contains(text, name) {
+			t.Errorf("the README names an exit code %s, which the program never prints", name)
+		}
+	}
+}
+
+// TestReadmeSaysExactlyWhatItHolds: the README says what its three entries are (each the close metadata of one
+// ledger, not a LedgerEntry); states the protocol's order of a pool's assets in full; does not present the compare
+// sample's differences as the same in every run; names the label and the names of everything the tool starts; and
+// warns that `ltk repro` overwrites the committed report and that `ltk compare` reads only the decoded JSON. Entry 2's
+// recipe document states the same order.
+func TestReadmeSaysExactlyWhatItHolds(t *testing.T) {
+	text := readReadme(t)
+	flat := strings.Join(strings.Fields(text), " ")
+	for _, gone := range []string{
+		"three ledger entries",
+		"The protocol orders a pool's assets by key bytes.",
+		"everything else in them is the same in every run",
+	} {
+		if strings.Contains(flat, gone) {
+			t.Errorf("the README still says %q", gone)
+		}
+	}
+	page := strings.Join(strings.Fields(readmeFirstPage(t, text)), " ")
+	for _, want := range []string{
+		"three corpus entries, each the close metadata (`LedgerCloseMeta`) of one ledger, captured from stellar-core",
+		"by asset type, then asset code, then issuer, and compares issuers by their key bytes",
+	} {
+		if !strings.Contains(page, want) {
+			t.Errorf("the first page does not say %q", want)
+		}
+	}
+	section := func(heading string) string {
+		return strings.Join(strings.Fields(readmeSection(t, text, heading)), " ")
+	}
+	checks := []struct{ heading, want string }{
+		{"## Conventions", "which pointers differ, and how many, depends on whether the two generations land in the same ledgers"},
+		{"## ltk compare", "which pointers differ, and how many, depends on whether the two generations land in the same ledgers"},
+		{"## ltk compare", "The sample shows one pair of runs; what holds in every run is `passed`."},
+		{"## ltk compare", "run `ltk check` on a corpus before comparing it"},
+		{"## Platforms", "`" + orchestration.LabelManaged + "=true` and `" + orchestration.LabelRun + "=<run id>`"},
+		{"## Platforms", "is named `ltk-<run id>-…`"},
+		{"## Platforms", "`docker ps -a --filter label=" + orchestration.LabelManaged + "=true`"},
+		{"### The two reproductions", "overwrites the committed report"},
+		{"### The two reproductions", "`git checkout repro/`"},
+		{"## Development", "overwrites the committed report"},
+		{"## Development", "`git checkout repro/`"},
+	}
+	for _, c := range checks {
+		if !strings.Contains(section(c.heading), c.want) {
+			t.Errorf("the README's %q section does not say %q", c.heading, c.want)
+		}
+	}
+	if strings.Contains(flat, "(12, 15 and 26 ledger-dependent differences)") {
+		t.Error("the compare sample's title gives its counts as if they were fixed")
+	}
+	b, err := os.ReadFile(filepath.Join(readmeModuleRoot, "internal", "generate", "recipes", "cap-0038-pool-share-trustline.md"))
+	if err != nil {
+		t.Fatal(err)
+	}
+	recipe := strings.Join(strings.Fields(string(b)), " ")
+	if !strings.Contains(recipe, "by asset type, then asset code, then issuer, and compares issuers by their key bytes") ||
+		strings.Contains(recipe, "(the protocol's order)") {
+		t.Error("entry 2's recipe document does not state the protocol's order of a pool's assets in full")
+	}
+}
+
 // readmeTableRows returns the cells of the rows of the Markdown table whose header is header.
 func readmeTableRows(text, header string) [][]string {
 	var rows [][]string

@@ -1,7 +1,7 @@
 # ltk: the seed of a Stellar ledger test corpus
 
-`ltk` (a working name) is a command-line program and three ledger entries captured from stellar-core. It is the seed
-of a proposed test kit for Stellar's XDR: a catalogue with its JSON Schema, three real corpus entries, the checks a
+`ltk` (a working name) is a command-line program and three corpus entries, each the close metadata
+(`LedgerCloseMeta`) of one ledger, captured from stellar-core. It is the seed of a proposed test kit for Stellar's XDR: a catalogue with its JSON Schema, three real corpus entries, the checks a
 corpus entry needs, and two known bugs reproduced on demand. It has no server, no database and no web interface.
 
 It does four things:
@@ -48,8 +48,9 @@ it.
   in ingestion": before that fix, wallet-backend failed to store such a signer, whose 68-byte key payload does not fit
   a column made for 32-byte keys. `ltk repro wallet-backend-729` reproduces it.
 - **Entry 2, `cap-0038-pool-share-trustline` (CAP-0038, liquidity pools).** A pool-share `ChangeTrust` whose two
-  issuers sort one way as strkey text and the other way as key bytes. The protocol orders a pool's assets by key bytes.
-  It is tied to js-stellar-sdk pull request 1766 (<https://github.com/stellar/js-stellar-sdk/pull/1766>), "fix: order
+  issuers sort one way as strkey text and the other way as key bytes. The protocol orders a pool's two assets by asset
+  type, then asset code, then issuer, and compares issuers by their key bytes; both of entry 2's assets are `USD`
+  credit assets, so the issuers decide. It is tied to js-stellar-sdk pull request 1766 (<https://github.com/stellar/js-stellar-sdk/pull/1766>), "fix: order
   asset issuers and ScVal map keys the way the network does": release
   [17.2.0](https://github.com/stellar/js-stellar-sdk/releases/tag/v17.2.0) refused the valid order, and
   [17.2.1](https://github.com/stellar/js-stellar-sdk/releases/tag/v17.2.1) fixed it.
@@ -97,6 +98,8 @@ ledger key and change kind, so a reordering alone is not a difference.
 ### The two reproductions
 
 Both reports are committed in `repro/`, as `ltk repro` wrote them; their full text is shown with the commands below.
+`ltk repro <target>` writes `repro/<target>.json` in the folder it is run from, so a run in a clone overwrites the
+committed report, and the README's tests then fail until the file is restored with `git checkout repro/`.
 
 - **wallet-backend 729.** The tool built wallet-backend from source at `2a0a84ea` (the commit before the fix) and at
   `2c873353` (the fix), each against a fresh TimescaleDB database of its own, on one local network at protocol 28, and
@@ -204,6 +207,9 @@ repository's root.
 
 `ltk list` and `ltk compare` need no container. `ltk generate`, `ltk check` (for its round trip) and `ltk repro` start
 containers and need Docker with Linux containers; where that is missing they exit `3` and say what is missing.
+Every container, network and volume the tool starts carries the labels `ltk.managed=true` and `ltk.run=<run id>`
+and is named `ltk-<run id>-…`, and the tool removes them before it exits. Should a run be killed before it can,
+`docker ps -a --filter label=ltk.managed=true` lists the containers left behind.
 
 **What each command downloads.** Each command that starts containers first pulls, from Docker Hub, any of its images
 that is not already present. The images are pinned by digest in
@@ -242,12 +248,12 @@ jobs install no container engine. The runs shown below for the commands that sta
   line, a JSON object `{"code": …, "message": …}`, when the command fails, and nothing when it succeeds.
 - **Exit codes:**
 
-  | Code | Name | Meaning |
+  | Exit | `code` on standard error | Meaning |
   |---|---|---|
-  | `0` | `success` | Every check passed, the comparison found only ledger-dependent differences, or the reproduction showed the expected before and after |
+  | `0` | none: nothing is written | Every check passed, the comparison found only ledger-dependent differences, or the reproduction showed the expected before and after |
   | `1` | `failure` | A check, a generation, a comparison or a reproduction failed |
-  | `2` | `usageError` | Invalid arguments, such as an unknown `--shape <entry id>` |
-  | `3` | `environmentMissing` | Something the command needs is missing, such as Docker with Linux containers or a pinned image that cannot be pulled |
+  | `2` | `usage_error` | Invalid arguments, such as an unknown `--shape <entry id>` |
+  | `3` | `environment_missing` | Something the command needs is missing, such as Docker with Linux containers or a pinned image that cannot be pulled |
 
 - **How to read the runs.** A fenced block that starts with `$ ltk` is a run: the command as it was typed, then its
   standard output exactly as the program wrote it, then `[exit N]`, the exit code it gave. Standard error was empty in
@@ -258,7 +264,9 @@ jobs install no container engine. The runs shown below for the commands that sta
   run again the same way by an integration test. The two `ltk repro` outputs are the committed files in `repro/`, byte
   for byte; a new run of `ltk repro wallet-backend-729` differs from its committed report in the run-specific fields
   its section names. The runs of `ltk generate` and `ltk compare` start a fresh network or read freshly generated
-  folders, so their hashes and ledger-dependent values differ from run to run; everything else in them is the same in every run.
+  folders, so their hashes and ledger-dependent values differ from run to run. In a comparison of two generations,
+  which pointers differ, and how many, depends on whether the two generations land in the same ledgers; what every
+  run shares is the outcome, `passed`.
 
 ## Synopses
 
@@ -523,14 +531,19 @@ $ ltk check --also-go gen-a
 `ltk compare <folder A> <folder B>` reads each entry's decoded JSON in two corpus folders and compares them value by
 value, by JSON pointer. Every difference is attributed to a ledger-dependent field, or to none. The command passes,
 and exits `0`, only when every difference is ledger-dependent. It starts no container and never compares bytes.
+`ltk compare` reads only each entry's `entry.json`: it does not hash or decode the XDR files, nor check the catalogue
+against its schema, so run `ltk check` on a corpus before comparing it.
 
 This run compared two folders generated one after the other with `ltk generate --all --out gen-a` and
 `ltk generate --all --out gen-b`. Each entry's `differ` list holds only ledger-dependent fields, so `passed` is `true`.
 In this run stellar-core emitted entry 2's changes in the same order in the two folders; had it not, they would be
-matched by ledger key and change kind, and the reordering would be no difference.
+matched by ledger key and change kind, and the reordering would be no difference. In a comparison of two generations,
+which pointers differ, and how many, depends on whether the two generations land in the same ledgers: in this run the entries showed 12, 15 and 26
+ledger-dependent differences, and two other generations can show more or fewer. The sample shows one pair of runs;
+what holds in every run is `passed`.
 
 <details>
-<summary><code>ltk compare</code> of two fresh generations (12, 15 and 26 ledger-dependent differences)</summary>
+<summary><code>ltk compare</code> of two fresh generations (one pair of runs)</summary>
 
 ```text
 $ ltk compare gen-a gen-b
@@ -1825,6 +1838,10 @@ The unit tests need no Docker and no network, and run on Linux, macOS and Window
 ```sh
 go test ./...
 ```
+
+They hold the README to the committed reports in `repro/`. `ltk repro <target>` writes `repro/<target>.json` in the
+folder it is run from, so a run in a clone overwrites the committed report and these tests fail until it is restored
+with `git checkout repro/`.
 
 The integration tests need Docker with Linux containers and network access to the image registry, GitHub, the Go
 module proxy and checksum database, and the npm registry. They are selected by the `integration` build tag. On a

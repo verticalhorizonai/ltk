@@ -11,6 +11,8 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
+	"runtime"
+	"strconv"
 	"strings"
 	"sync"
 	"testing"
@@ -247,17 +249,43 @@ func (f *fakeEngine) Exec(ctx context.Context, container string, stdin []byte, a
 }
 
 // fakeClock advances when the runner sleeps: the deadline is injected, never waited for.
+//
+// Each goroutine has a time line of its own, as each would have on the wall clock while the others sleep beside it.
+// The first goroutine to read the clock (the test's, which calls run) owns the base line; any other goroutine (the two
+// commits' observers, which run at once) starts its own line at the base time when it first reads the clock, and its
+// sleeps advance only its own line. With one shared line, one observer's sleeps counted against the other's deadline,
+// and the outcome depended on how the scheduler interleaved them.
 type fakeClock struct {
-	mu sync.Mutex
-	t  time.Time
+	mu   sync.Mutex
+	base time.Time
+	root uint64
+	own  map[uint64]time.Time
 }
 
-func newFakeClock() *fakeClock { return &fakeClock{t: time.Date(2026, 11, 16, 10, 0, 0, 0, time.UTC)} }
+func newFakeClock() *fakeClock {
+	return &fakeClock{base: time.Date(2026, 11, 16, 10, 0, 0, 0, time.UTC), own: map[uint64]time.Time{}}
+}
+
+// line returns the calling goroutine's time; the caller holds mu.
+func (c *fakeClock) line(g uint64) time.Time {
+	if c.root == 0 {
+		c.root = g
+	}
+	if g == c.root {
+		return c.base
+	}
+	t, ok := c.own[g]
+	if !ok {
+		t = c.base
+		c.own[g] = t
+	}
+	return t
+}
 
 func (c *fakeClock) now() time.Time {
 	c.mu.Lock()
 	defer c.mu.Unlock()
-	return c.t
+	return c.line(goroutineID())
 }
 
 func (c *fakeClock) sleep(ctx context.Context, d time.Duration) error {
@@ -266,8 +294,29 @@ func (c *fakeClock) sleep(ctx context.Context, d time.Duration) error {
 	}
 	c.mu.Lock()
 	defer c.mu.Unlock()
-	c.t = c.t.Add(d)
+	g := goroutineID()
+	t := c.line(g).Add(d)
+	if g == c.root {
+		c.base = t
+	} else {
+		c.own[g] = t
+	}
 	return nil
+}
+
+// goroutineID is the calling goroutine's number, from the first line of its stack ("goroutine N [running]:").
+func goroutineID() uint64 {
+	buf := make([]byte, 64)
+	buf = buf[:runtime.Stack(buf, false)]
+	f := strings.Fields(string(buf))
+	if len(f) < 2 || f[0] != "goroutine" {
+		panic(fmt.Sprintf("fakeClock: unexpected stack header %q", buf))
+	}
+	id, err := strconv.ParseUint(f[1], 10, 64)
+	if err != nil {
+		panic(fmt.Sprintf("fakeClock: unexpected stack header %q", buf))
+	}
+	return id
 }
 
 // fakeRecipe is entry 1's recipe: it records what the engine showed when it ran, and returns ledger testLedger.
@@ -340,4 +389,40 @@ func expectedRuns(t *testing.T) (pre, fix []fakeRun) {
 	}
 	fix = []fakeRun{{lines: fixture(t, "fixed-2c873353"), exitAfter: -1, ingestAfter: 2}}
 	return pre, fix
+}
+
+// The fake clock keeps each goroutine's time apart, as the wall clock does for two observers sleeping side by side:
+// one observer's sleeps never count against the other's deadline, whatever order the scheduler runs them in.
+func TestFakeClockKeepsEachGoroutinesTime(t *testing.T) {
+	clk := newFakeClock()
+	t0 := clk.now() // the test's goroutine owns the base line
+	bStarted, aDone := make(chan time.Time), make(chan struct{})
+	var bNow time.Time
+	var wg sync.WaitGroup
+	wg.Add(2)
+	go func() { // B reads its start, then reads again only after A slept through a whole deadline
+		defer wg.Done()
+		bStarted <- clk.now()
+		<-aDone
+		bNow = clk.now()
+	}()
+	bStart := <-bStarted
+	go func() {
+		defer wg.Done()
+		for range 450 {
+			_ = clk.sleep(context.Background(), PollInterval)
+		}
+		close(aDone)
+	}()
+	wg.Wait()
+	if !bStart.Equal(t0) || !bNow.Equal(bStart) {
+		t.Fatalf("goroutine B started at %v and read %v after A's sleeps; want both %v", bStart, bNow, t0)
+	}
+	if !clk.now().Equal(t0) {
+		t.Fatalf("the base line moved to %v with the other goroutines' sleeps", clk.now())
+	}
+	_ = clk.sleep(context.Background(), time.Minute)
+	if got := clk.now().Sub(t0); got != time.Minute {
+		t.Fatalf("the base line advanced %v on its own sleep of 1m", got)
+	}
 }

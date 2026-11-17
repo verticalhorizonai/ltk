@@ -43,7 +43,9 @@ Both assets have the code `USD`. The pool is the constant-product pool of the tw
 3. **The shape's transaction**, in a later ledger, so it is alone in its ledger:
    - source `source`, next sequence number, base fee 100 stroops, no time bounds, no memo;
    - one `ChangeTrust` whose line is the pool share of `{ asset_a: USD:issuer-6, asset_b: USD:issuer-3, fee: 30 }`,
-     the assets in key-byte order (the protocol's order), with the default (maximum) limit;
+     the assets in key-byte order, with the default (maximum) limit. That is the protocol's order here: the protocol
+     orders a pool's two assets by asset type, then asset code, then issuer, and compares issuers by their key bytes;
+     both assets are `USD` credit assets, so the issuers decide;
    - signed by `source`, submitted with RPC `sendTransaction`; `getTransaction` is polled until it is no longer
      `NOT_FOUND`, and it must be `SUCCESS`.
 4. **The capture.** RPC `getLedgers` of that ledger, limit 1. Its `metadataXdr`, base64-decoded, is the entry's bytes.
